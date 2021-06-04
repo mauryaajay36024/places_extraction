@@ -1,0 +1,48 @@
+spring:
+  profiles: dev
+  profiles.include:
+    - 'message_codes'
+    - 'commons'
+
+livy:
+  host: http://wdc04-prod-thor-compserv02.adnear.net:8998
+  createBatchEndpoint: /batches
+  #historicJobLocation: hdfs://wdc-prod-hadoop-nn.adnear.net:8020/user/dataengg/deploy/historic_segment_collection.py
+
+mongo:
+  uriInConsul: "dev.allspark.mongo.uri"
+  database: "test"
+
+---
+
+spring:
+  profiles: staging
+  profiles.include:
+    - 'message_codes'
+    - 'commons'
+
+livy:
+  host: http://wdc04-prod-thor-compserv02.adnear.net:8998
+  createBatchEndpoint: /batches
+  #historicJobLocation: hdfs://wdc-prod-hadoop-nn.adnear.net:8020/user/dataengg/deploy/historic_segment_collection.py
+
+mongo:
+    uriInConsul: "dev.allspark.mongo.uri"
+    database: "test"
+
+---
+
+spring:
+  profiles: prod
+  profiles.include:
+    - 'message_codes'
+    - 'commons'
+
+livy:
+  host: http://wdc04-prod-thor-compserv02.adnear.net:8998
+  createBatchEndpoint: /batches
+  #historicJobLocation: hdfs://wdc-prod-hadoop-nn.adnear.net:8020/user/dataengg/deploy/historic_segment_collection.py
+
+mongo:
+  uriInConsul: "dev.allspark.mongo.uri"
+  database: "test"

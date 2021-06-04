@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.near.platform</groupId>
+		<artifactId>service-core</artifactId>
+		<version>0.0.1</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<artifactId>service-template</artifactId>
+	<name>near-platform-service-template</name>
+	<description>Near platform service template for new micro service to be created at Near</description>
+
+	<properties>
+		<java.version>11</java.version>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>deployment</id>
+			<name>Internal Releases</name>
+			<url>http://int-nexus.adnear.net:8081/repository/platform/</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.near.platform</groupId>
+			<artifactId>near-utility</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.near.platform</groupId>
+			<artifactId>near-mongodb</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.near.platform</groupId>
+			<artifactId>near-commons</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<!-- download message code yml and place it under resources to be read 
+				by app -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>wagon-maven-plugin</artifactId>
+				<version>2.0.0</version>
+				<executions>
+					<execution>
+						<id>download-messageCodes-file</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>download-single</goal>
+						</goals>
+						<configuration>
+							<url>http://nmm.adnear.net</url>
+							<fromFile>/api/v1/messages/download_yml</fromFile>
+							<toFile>src/main/resources/application-message_codes.yml</toFile>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

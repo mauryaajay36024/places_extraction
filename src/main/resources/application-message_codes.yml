@@ -1,0 +1,2111 @@
+---
+platform:
+  PLT-0001:
+    codeType: ERROR
+    shortDesc: Oops, something went wrong
+    longDesc: Oops, something went wrong
+  PLT-0002:
+    codeType: ERROR
+    shortDesc: User is disabled
+    longDesc: User is disabled
+  PLT-0003:
+    codeType: ERROR
+    shortDesc: Login failed
+    longDesc: Invalid user credentials
+  PLT-0004:
+    codeType: INFO
+    shortDesc: Signup success
+    longDesc: User signed up successfully
+  PLT-0005:
+    codeType: INFO
+    shortDesc: Login success
+    longDesc: User logged in successfully
+  PLT-0006:
+    codeType: ERROR
+    shortDesc: Error
+    longDesc: "{0}"
+  PLT-0007:
+    codeType: INFO
+    shortDesc: App is healthy
+    longDesc: App %s is healthy
+  PLT-0008:
+    codeType: CONFIRM
+    shortDesc: User Login Confirmed
+    longDesc: 'Login was created and details were saved successfully '
+  PLT-0009:
+    codeType: INFO
+    shortDesc: Account verification success
+    longDesc: Account verified successfully
+  PLT-0010:
+    codeType: ERROR
+    shortDesc: Email verification code not found
+    longDesc: Unable to find email verification code
+  PLT-0011:
+    codeType: CONFIRM
+    shortDesc: Email verification code expired
+    longDesc: Email verification link is expired
+  PLT-0012:
+    codeType: ERROR
+    shortDesc: User already exist
+    longDesc: User already exist in the system
+  PLT-0013:
+    codeType: CONFIRM
+    shortDesc: Password updated success
+    longDesc: Password updated successfully
+  PLT-0014:
+    codeType: ERROR
+    shortDesc: User not found
+    longDesc: User not found
+  PLT-0015:
+    codeType: CONFIRM
+    shortDesc: Reset password link shared
+    longDesc: Reset password link shared shared to your email
+  PLT-0016:
+    codeType: ERROR
+    shortDesc: Email required to reset password
+    longDesc: Email id is required to reset password
+  PLT-0017:
+    codeType: ERROR
+    shortDesc: Invalid reset password code
+    longDesc: Invalid reset password code
+  PLT-0018:
+    codeType: ERROR
+    shortDesc: Reset password code expired
+    longDesc: Reset password link expired
+  PLT-0019:
+    codeType: CONFIRM
+    shortDesc: Stripe payment initialized
+    longDesc: Stripe payment successfully initialized
+  PLT-0020:
+    codeType: ERROR
+    shortDesc: Unrecognized gateway
+    longDesc: Unrecognized gateway has been provided
+  PLT-0021:
+    codeType: ERROR
+    shortDesc: Invalid request body
+    longDesc: Request body is invalid
+  PLT-0022:
+    codeType: CONFIRM
+    shortDesc: Payment gateway name not found
+    longDesc: Payment gateway name not found
+  PLT-0023:
+    codeType: ERROR
+    shortDesc: Product name not found
+    longDesc: Product name not found
+  PLT-0024:
+    codeType: ERROR
+    shortDesc: Payment gateway name not found
+    longDesc: Payment gateway name not found
+  PLT-0025:
+    codeType: WARN
+    shortDesc: Already verified
+    longDesc: User already verified
+  PLT-0026:
+    codeType: ERROR
+    shortDesc: Invalid reset password link
+    longDesc: Reset password link has been used already
+  PLT-0027:
+    codeType: CONFIRM
+    shortDesc: User agreement signature updated
+    longDesc: User agreement signature updated
+  PLT-0028:
+    codeType: ERROR
+    shortDesc: User already agreed T&C
+    longDesc: User already agreed T&C
+  PLT-0029:
+    codeType: CONFIRM
+    shortDesc: User details fetched successfully
+    longDesc: User details fetched successfully
+  PLT-0030:
+    codeType: CONFIRM
+    shortDesc: User invite success
+    longDesc: User invited successfully
+  PLT-0031:
+    codeType: CONFIRM
+    shortDesc: User compass subscription cancelled successfully
+    longDesc: User compass subscription cancelled successfully
+  PLT-0032:
+    codeType: WARN
+    shortDesc: User compass subscription already cancelled
+    longDesc: User compass subscription already cancelled
+  PLT-0033:
+    codeType: ERROR
+    shortDesc: User compass subscription cancellation failed
+    longDesc: User compass subscription cancellation failed
+  PLT-0034:
+    codeType: ERROR
+    shortDesc: Plan Id is required
+    longDesc: Plan Id is required to cancel subscription for user
+  PLT-0035:
+    codeType: ERROR
+    shortDesc: No active subscription found
+    longDesc: No active subscription found for given user and plan
+  PLT-0036:
+    codeType: ERROR
+    shortDesc: Invalid email address
+    longDesc: Invalid email address
+  PLT-0037:
+    codeType: ERROR
+    shortDesc: Email is required
+    longDesc: Email is required for signup
+  PLT-0038:
+    codeType: ERROR
+    shortDesc: Not allowed to update user details
+    longDesc: Not allowed to update given user details
+  PLT-0039:
+    codeType: CONFIRM
+    shortDesc: User details updated
+    longDesc: User details updated successfully
+  PLT-0040:
+    codeType: CONFIRM
+    shortDesc: Verification code sent to email
+    longDesc: 'Verification code sent to email '
+  PLT-0041:
+    codeType: ERROR
+    shortDesc: User access restricted
+    longDesc: Looks like you don't have access to the product, please contact the
+      support team.
+  PLT-0042:
+    codeType: ERROR
+    shortDesc: Password is required
+    longDesc: Password is required for user signup
+  PLT-0043:
+    codeType: ERROR
+    shortDesc: Unknown product name
+    longDesc: Unknown product name in signup request
+  PLT-0044:
+    codeType: CONFIRM
+    shortDesc: User details updated successfully
+    longDesc: User details updated successfully
+  PLT-0045:
+    codeType: ERROR
+    shortDesc: Email is required to update user details
+    longDesc: Email is required to update user details
+  PLT-0046:
+    codeType: CONFIRM
+    shortDesc: Tenant switched successfully
+    longDesc: Tenant switched successfully
+  PLT-0047:
+    codeType: ERROR
+    shortDesc: Cannot Switch Tenant
+    longDesc: The user to tenant mapping not found. Hence cannot switch user.
+  PLT-0048:
+    codeType: CONFIRM
+    shortDesc: Attribtuion window days error
+    longDesc: The campaign needs to be ended at least 14 days before the current date
+      to start attribtuion report
+  PLT-0049:
+    codeType: CONFIRM
+    shortDesc: Tenant Name Fetched
+    longDesc: Tenant Name Fetched Successfully
+  PLT-0050:
+    codeType: ERROR
+    shortDesc: No tenant found
+    longDesc: Tenant Code to Name Mapping not found
+  PLT-0051:
+    codeType: ERROR
+    shortDesc: User Mapping Exists
+    longDesc: User mapping exists for the product
+  PLT-0052:
+    codeType: CONFIRM
+    shortDesc: Fetched tenants successfully
+    longDesc: Tenant details fetched successfully
+  PLT-0053:
+    codeType: ERROR
+    shortDesc: No tenants mapped
+    longDesc: No tenants mapped to this product
+  PLT-0054:
+    codeType: CONFIRM
+    shortDesc: Access Granted
+    longDesc: User has been granted access to the tenant
+  PLT-0055:
+    codeType: ERROR
+    shortDesc: User already has access
+    longDesc: User already has access to the tenant
+  PLT-0056:
+    codeType: CONFIRM
+    shortDesc: Tenant Created
+    longDesc: Tenant Set up successful
+  PLT-0057:
+    codeType: CONFIRM
+    shortDesc: ACL fetched successfully
+    longDesc: ACL fetched successfully
+  PLT-0058:
+    codeType: CONFIRM
+    shortDesc: ACL updated Successfully
+    longDesc: ACL updated Successfully
+  PLT-0059:
+    codeType: CONFIRM
+    shortDesc: Error in ACL update
+    longDesc: An Error occurred when updating the ACL
+  PLT-0060:
+    codeType: CONFIRM
+    shortDesc: Ifa optout check complete
+    longDesc: Ifa optout check complete
+  PLT-0061:
+    codeType: ERROR
+    shortDesc: ACL could not be created
+    longDesc: The ACL for the select product role combination exists
+  PLT-0062:
+    codeType: CONFIRM
+    shortDesc: ACL set up complete
+    longDesc: ACL set up complete
+  PLT-0063:
+    codeType: CONFIRM
+    shortDesc: Created Rubicon Segment
+    longDesc: Created Rubicon Segment Successfully
+  PLT-0064:
+    codeType: CONFIRM
+    shortDesc: Updated Last Exported Time
+    longDesc: Updated Last Exported Time Successfully
+  PLT-0065:
+    codeType: CONFIRM
+    shortDesc: Updated Deleted Flag
+    longDesc: Updated Deleted Flag Successfully
+  PLT-0066:
+    codeType: ERROR
+    shortDesc: Invalid Date Format
+    longDesc: Please use yyyy-MM-dd date format
+  PLT-0067:
+    codeType: INFO
+    shortDesc: Invalid Country
+    longDesc: Invalid Country provided in the request
+  PLT-0068:
+    codeType: CONFIRM
+    shortDesc: Upload Success
+    longDesc: File Uploaded Successfully, you will receive a mail with download link
+      for the processed file once the Geo-coding process is completed
+  PLT-0069:
+    codeType: CONFIRM
+    shortDesc: Brand Affinity Saved Successfully
+    longDesc: Brand Affinity Saved Successfully
+  PLT-0070:
+    codeType: CONFIRM
+    shortDesc: Brand Metrics Saved Successfully
+    longDesc: Brand Metrics Saved Successfully
+  PLT-0071:
+    codeType: CONFIRM
+    shortDesc: Retrieved Brand Affinity Successfully
+    longDesc: Retrieved Brand Affinity Successfully
+  PLT-0072:
+    codeType: CONFIRM
+    shortDesc: Retrieved Brand Metrics Successfully
+    longDesc: Retrieved Brand Metrics Successfully
+  PLT-0073:
+    codeType: CONFIRM
+    shortDesc: Fetched user preferences
+    longDesc: Fetched user preferences successfully
+  PLT-0074:
+    codeType: CONFIRM
+    shortDesc: User preferences saved
+    longDesc: User preferences saved successfully
+  PLT-0075:
+    codeType: CONFIRM
+    shortDesc: User preferences not found
+    longDesc: User preferences not found for given user
+  PLT-0076:
+    codeType: CONFIRM
+    shortDesc: Facade Brand Affinity Retrieved Successfully
+    longDesc: Facade Brand Affinity Retrieved Successfully
+  PLT-0077:
+    codeType: CONFIRM
+    shortDesc: Facade Brand Metrics Retrieved Successfully
+    longDesc: Facade Brand Metrics Retrieved Successfully
+  PLT-0078:
+    codeType: CONFIRM
+    shortDesc: Retrieved Brand Stats Successfully
+    longDesc: Retrieved Brand Stats Successfully
+  PLT-0079:
+    codeType: CONFIRM
+    shortDesc: Retrieved Top Super Category Successfully
+    longDesc: Retrieved Top Super Category Successfully
+  PLT-0080:
+    codeType: CONFIRM
+    shortDesc: Saved HomeLocations at GeoHash Level Successfully
+    longDesc: Saved HomeLocations at GeoHash Level Successfully
+  PLT-0081:
+    codeType: CONFIRM
+    shortDesc: Saved HomeLocations at Admin Code Level Successfully
+    longDesc: Saved HomeLocations at Admin Code Level Successfully
+  PLT-0082:
+    codeType: CONFIRM
+    shortDesc: Retrieved HomeLocations at GeoHash Level Successfully
+    longDesc: Retrieved HomeLocations at GeoHash Level Successfully
+  PLT-0083:
+    codeType: CONFIRM
+    shortDesc: Retrieved HomeLocations at AdminCode Level Successfully
+    longDesc: Retrieved HomeLocations at AdminCode Level Successfully
+  PLT-0084:
+    codeType: CONFIRM
+    shortDesc: Created Adsquare Segment Successfully
+    longDesc: Created Adsquare Segment Successfully
+  PLT-0085:
+    codeType: CONFIRM
+    shortDesc: Segment used  was previously exported.
+    longDesc: Segment  used was previously exported.
+  PLT-0086:
+    codeType: CONFIRM
+    shortDesc: Rule Replayer triggered
+    longDesc: Rule Replayer triggered for Segment Successfully
+  PLT-0087:
+    codeType: INFO
+    shortDesc: Success
+    longDesc: Successful Response
+  PLT-0088:
+    codeType: INFO
+    shortDesc: Not Match Found
+    longDesc: No matches found for the keyword
+  PLT-0089:
+    codeType: INFO
+    shortDesc: An email has been sent with the password reset link
+    longDesc: An email has been sent with the password reset link
+  PLT-0090:
+    codeType: ERROR
+    shortDesc: Password Criteria failed
+    longDesc: Password does not meet the criteria
+  PLT-0091:
+    codeType: ERROR
+    shortDesc: Not Found
+    longDesc: "% not found"
+  PLT-0092:
+    codeType: ERROR
+    shortDesc: Tenant not Active
+    longDesc: Tenant no longer Active
+  PLT-0093:
+    codeType: CONFIRM
+    shortDesc: Tenant Deactivated
+    longDesc: Tenant Deactivated successfully
+  PLT-0094:
+    codeType: CONFIRM
+    shortDesc: User Access Revoked
+    longDesc: User Access to the tenant has been revoked
+  PLT-0095:
+    codeType: INFO
+    shortDesc: Fetched users
+    longDesc: Fetched user mapped to Tenant
+  PLT-0096:
+    codeType: CONFIRM
+    shortDesc: Tenant is now Active
+    longDesc: Tenant is now Active
+  PLT-0097:
+    codeType: ERROR
+    shortDesc: Country is mandatory
+    longDesc: Country mandatory for setting up tenant.
+  PLT-0098:
+    codeType: ERROR
+    shortDesc: Invalid Credentials
+    longDesc: Invalid Credentials
+  PLT-0099:
+    codeType: INFO
+    shortDesc: line items retrieved Successfully
+    longDesc: line items retrieved Successfully
+  PLT-0100:
+    codeType: INFO
+    shortDesc: Retrieved campaign performance successfully
+    longDesc: Retrieved campaign performance successfully
+  PLT-0101:
+    codeType: INFO
+    shortDesc: Retrieved campaign performance daywise successfully
+    longDesc: Retrieved campaign performance daywise successfully
+  PLT-0102:
+    codeType: INFO
+    shortDesc: Retrieved campaign info Successfully
+    longDesc: Retrieved campaign info Successfully
+  PLT-0103:
+    codeType: INFO
+    shortDesc: Retrieved campaign creatives info Successfully
+    longDesc: Retrieved campaign creatives info Successfully
+  PLT-0104:
+    codeType: ERROR
+    shortDesc: Creative Under Review
+    longDesc: Creative is under review and hence cannot be assigned
+  PLT-0105:
+    codeType: CONFIRM
+    shortDesc: Tenant Consumer Mapped
+    longDesc: Tenant Consumer Mapped
+  PLT-0106:
+    codeType: CONFIRM
+    shortDesc: "."
+    longDesc: "."
+  PLT-0107:
+    codeType: CONFIRM
+    shortDesc: "."
+    longDesc: "."
+  PLT-0108:
+    codeType: ERROR
+    shortDesc: "."
+    longDesc: "."
+allspark:
+  ASP-0001:
+    codeType: INFO
+    shortDesc: Loading..
+    longDesc: Please standby..
+  ASP-0002:
+    codeType: INFO
+    shortDesc: Updating..
+    longDesc: Please standby..
+  ASP-0003:
+    codeType: INFO
+    shortDesc: Updating campaign/line-item status
+    longDesc: Please standby..
+  ASP-0004:
+    codeType: CONFIRM
+    shortDesc: Confirm
+    longDesc: Are you sure you want to delete this stack? <br />Upon deletion all
+      cards in this stack will fall back to ‘My Cards’.
+  ASP-0005:
+    codeType: CONFIRM
+    shortDesc: Confirm
+    longDesc: Are you sure you want to delete this card? <br />Upon deletion, this
+      card will be moved to ‘Deleted’ folder and will remain there until the end of
+      billing cycle.
+  ASP-0006:
+    codeType: CONFIRM
+    shortDesc: Confirm
+    longDesc: Are you sure you want to move this card out of stack?
+  ASP-0007:
+    codeType: CONFIRM
+    shortDesc: Confirm
+    longDesc: Are you sure you want to restore this card?
+  ASP-0008:
+    codeType: CONFIRM
+    shortDesc: Confirm
+    longDesc: Are you sure you want to {0} this card?
+  ASP-0009:
+    codeType: WARN
+    shortDesc: Estimate Unavailable
+    longDesc: Counts are too low for selected criteria. Relax your criteria.
+  ASP-0010:
+    codeType: INFO
+    shortDesc: Upload complete
+    longDesc: File being processed. Please check back later.
+  ASP-0011:
+    codeType: INFO
+    shortDesc: Uploading..
+    longDesc: "{0}% complete"
+  ASP-0012:
+    codeType: ERROR
+    shortDesc: Unable to create segment
+    longDesc: System error. Please contact support.
+  ASP-0013:
+    codeType: WARN
+    shortDesc: Account upgrade
+    longDesc: This feature is not active in your account.
+  ASP-0014:
+    codeType: ERROR
+    shortDesc: Update failed!
+    longDesc: "{0}"
+  ASP-0015:
+    codeType: WARN
+    shortDesc: Campaign insights
+    longDesc: Campaign insights doesn't seem to have updated for quite some time.
+      Our engineers are working to fix it ASAP.
+  ASP-0016:
+    codeType: INFO
+    shortDesc: Hmm, did you mean…
+    longDesc: "{0}"
+  ASP-0017:
+    codeType: INFO
+    shortDesc: Sorry, I didn't get that
+    longDesc: "{0}"
+  ASP-0018:
+    codeType: INFO
+    shortDesc: Updated!
+    longDesc: 'Updated title: {0}'
+  ASP-0019:
+    codeType: ERROR
+    shortDesc: Application Error
+    longDesc: Please try again
+  ASP-0020:
+    codeType: INFO
+    shortDesc: Changed!
+    longDesc: "{0}"
+  ASP-0021:
+    codeType: INFO
+    shortDesc: Request received
+    longDesc: We have received your data export request. <br />Our team will get back
+      to you within 48 hours by email with details.
+  ASP-0022:
+    codeType: ERROR
+    shortDesc: Unable to send!
+    longDesc: "{0}"
+  ASP-0023:
+    codeType: CONFIRM
+    shortDesc: Confirm
+    longDesc: Are you sure you want to delete this {0}?
+  ASP-0024:
+    codeType: ERROR
+    shortDesc: Invalid banner dimension!
+    longDesc: Valid dimensions are {0}.
+  ASP-0025:
+    codeType: ERROR
+    shortDesc: Available banner dimension!
+    longDesc: "'{0}x{1}' dimension was already added. Please select other banner with
+      different dimension."
+  ASP-0026:
+    codeType: ERROR
+    shortDesc: Different banner format!
+    longDesc: Please select other banner with {0} format.
+  ASP-0027:
+    codeType: ERROR
+    shortDesc: Exceeded maximum video size!
+    longDesc: Maximum video size is {0} MB.
+  ASP-0028:
+    codeType: INFO
+    shortDesc: Attribution Requirement Not Satisfied
+    longDesc: "{0} <br /> Do you want to continue?"
+  ASP-0029:
+    codeType: INFO
+    shortDesc: Campaign
+    longDesc: Creating campaign...
+  ASP-0030:
+    codeType: INFO
+    shortDesc: Campaign
+    longDesc: Editing campaign...
+  ASP-0031:
+    codeType: INFO
+    shortDesc: Campaign submitted.
+    longDesc: Campaign edit successful.
+  ASP-0032:
+    codeType: INFO
+    shortDesc: Campaign submitted.
+    longDesc: Draft has been saved.
+  ASP-0033:
+    codeType: INFO
+    shortDesc: Campaign submitted.
+    longDesc: Your campaign will move to approved status after review.
+  ASP-0034:
+    codeType: ERROR
+    shortDesc: Campaign Setup Validation Failed
+    longDesc: "{0}"
+  ASP-0035:
+    codeType: ERROR
+    shortDesc: Campaign Setup Failed!
+    longDesc: Please contact support.
+  ASP-0036:
+    codeType: ERROR
+    shortDesc: Invalid icon image dimension!
+    longDesc: Dimension should be greater than or equal to {0} and in the ratio of
+      {1}:1.
+  ASP-0037:
+    codeType: INFO
+    shortDesc: Attribution Places
+    longDesc: You have chosen to use these attribution places for all line items.
+      Any attribution places you have previously selected will be removed. <br />
+      <br /> Do you wish to continue with your selection?
+  ASP-0038:
+    codeType: INFO
+    shortDesc: Attribution Places
+    longDesc: Do you want to remove common attribution places from other line items?
+  ASP-0039:
+    codeType: CONFIRM
+    shortDesc: Are you sure?
+    longDesc: You are requesting for more credits!
+  ASP-0040:
+    codeType: INFO
+    shortDesc: Upgrade Plan
+    longDesc: Send request to upgrade your plan to {0}?
+  ASP-0041:
+    codeType: INFO
+    shortDesc: Upgrade Plan
+    longDesc: Request to upgrade plan has been sent successfully.
+  ASP-0042:
+    codeType: ERROR
+    shortDesc: Upgrade Plan
+    longDesc: "{0}"
+  ASP-0043:
+    codeType: INFO
+    shortDesc: Invitation Sent!
+    longDesc: 'An Invite for Trial is sent to: {0}'
+  ASP-0044:
+    codeType: INFO
+    shortDesc: Sending Invite
+    longDesc: Please standby..
+  ASP-0045:
+    codeType: ERROR
+    shortDesc: Sending failed!
+    longDesc: "{0}"
+  ASP-0046:
+    codeType: ERROR
+    shortDesc: Allspark V2 client, insights unavailable.
+    longDesc: "{0}"
+  ASP-0047:
+    codeType: INFO
+    shortDesc: Updated!
+    longDesc: 'Updated Client Quotas: '
+  ASP-0048:
+    codeType: ERROR
+    shortDesc: Error
+    longDesc: "{0}"
+  ASP-0049:
+    codeType: INFO
+    shortDesc: Updated!
+    longDesc: 'Updated Additional Seats: '
+  ASP-0050:
+    codeType: INFO
+    shortDesc: Updated!
+    longDesc: 'Updated Client Addons: '
+  ASP-0051:
+    codeType: ERROR
+    shortDesc: Subject is empty!
+    longDesc: "{0}"
+  ASP-0052:
+    codeType: INFO
+    shortDesc: Added!
+    longDesc: 'Added Client Notes: '
+  ASP-0053:
+    codeType: ERROR
+    shortDesc: Adding failed!
+    longDesc: "{0}"
+  ASP-0054:
+    codeType: INFO
+    shortDesc: User deleted!
+    longDesc: "{0} has been deleted!"
+  ASP-0055:
+    codeType: ERROR
+    shortDesc: Deleting failed!
+    longDesc: "{0}"
+  ASP-0056:
+    codeType: CONFIRM
+    shortDesc: Are you sure?
+    longDesc: You are going to delete {0}
+  ASP-0057:
+    codeType: ERROR
+    shortDesc: Timeout
+    longDesc: Looks like it is taking too much time to load. Please try after some
+      time.
+  ASP-0058:
+    codeType: INFO
+    shortDesc: Updating segment title
+    longDesc: Standby..
+  ASP-0059:
+    codeType: INFO
+    shortDesc: Changing!
+    longDesc: Standby..
+  ASP-0060:
+    codeType: INFO
+    shortDesc: Generating report
+    longDesc: 'Please hold on.. <br /> Note: Please disable popup blockers to view
+      the generated PDF report. This report will also be available under Activities
+      > Reports section.'
+  ASP-0061:
+    codeType: INFO
+    shortDesc: Sending export request...
+    longDesc: Please standby..
+  ASP-0062:
+    codeType: ERROR
+    shortDesc: Error
+    longDesc: Attribution places can't be more than {0}
+  ASP-0063:
+    codeType: INFO
+    shortDesc: Sending request...
+    longDesc: Please standby..
+  ASP-0064:
+    codeType: ERROR
+    shortDesc: Attention
+    longDesc: "{0}"
+  ASP-0065:
+    codeType: INFO
+    shortDesc: Updating Client Quotas
+    longDesc: Please standby..
+  ASP-0066:
+    codeType: INFO
+    shortDesc: Updating Client Addons
+    longDesc: Please standby..
+  ASP-0067:
+    codeType: INFO
+    shortDesc: Adding Client Notes
+    longDesc: Please standby..
+  ASP-0068:
+    codeType: INFO
+    shortDesc: Adding user
+    longDesc: Please standby..
+  ASP-0069:
+    codeType: INFO
+    shortDesc: Deleting user
+    longDesc: Please standby..
+  ASP-0070:
+    codeType: WARN
+    shortDesc: Are you sure?
+    longDesc: You are about to end this campaign. THIS CANNOT BE UNDONE.
+  ASP-0071:
+    codeType: INFO
+    shortDesc: Unable to update campaign/line-item status
+    longDesc: "{0}"
+  ASP-0072:
+    codeType: ERROR
+    shortDesc: Update failed!
+    longDesc: "{0}"
+  ASP-0073:
+    codeType: INFO
+    shortDesc: Processing complete
+    longDesc: Please standby as we load your places
+  ASP-0074:
+    codeType: INFO
+    shortDesc: Upload complete
+    longDesc: "<div id='custom-places-processing-status'>Processing status:<span></span><br/>You
+      may close this screen or wait till file is processed.We'll notify you by email
+      once it is complete.</div>"
+  ASP-0075:
+    codeType: ERROR
+    shortDesc: Segment creation failed
+    longDesc: No Place(s)/Card(s) selected.
+  ASP-0076:
+    codeType: INFO
+    shortDesc: Creating segment
+    longDesc: Please standby..
+  ASP-0077:
+    codeType: INFO
+    shortDesc: Segment created.
+    longDesc: Redirecting..
+  ASP-0078:
+    codeType: ERROR
+    shortDesc: Segment creation failed
+    longDesc: "{0}"
+  ASP-0079:
+    codeType: INFO
+    shortDesc: Searching..
+    longDesc: Please standby..
+  ASP-0080:
+    codeType: INFO
+    shortDesc: No results
+    longDesc: No results {0}
+  ASP-0081:
+    codeType: ERROR
+    shortDesc: No results
+    longDesc: Check your search query, should be atleast 2 characters
+  ASP-0082:
+    codeType: ERROR
+    shortDesc: Oops! Something went wrong!
+    longDesc: Please try again or send mail to support team.
+  ASP-0083:
+    codeType: ERROR
+    shortDesc: Oops! Validation Failed!
+    longDesc: "{0}"
+  ASP-0084:
+    codeType: INFO
+    shortDesc: Sending more credits request
+    longDesc: Please standby..
+  ASP-0085:
+    codeType: INFO
+    shortDesc: Sent
+    longDesc: Your message has been sent to your account manager
+  ASP-0086:
+    codeType: INFO
+    shortDesc: Unable to contact account manager
+    longDesc: Please contact support.
+  ASP-0087:
+    codeType: ERROR
+    shortDesc: Unable to send request
+    longDesc: "{0}"
+  ASP-0088:
+    codeType: CONFIRM
+    shortDesc: Are you sure?
+    longDesc: "{0}"
+  ASP-0089:
+    codeType: INFO
+    shortDesc: Deleting segment
+    longDesc: Please standby..
+  ASP-0090:
+    codeType: ERROR
+    shortDesc: Audience Delete error
+    longDesc: "{0} <br />Please end the campaigns before deleting. You may also contact
+      your account manager."
+  ASP-0091:
+    codeType: INFO
+    shortDesc: Deleting custom place
+    longDesc: Please standby..
+  ASP-0092:
+    codeType: ERROR
+    shortDesc: Custom Place Delete error
+    longDesc: "{0} <br />Please contact support."
+  ASP-0093:
+    codeType: INFO
+    shortDesc: Sending
+    longDesc: Please standby..
+  ASP-0094:
+    codeType: INFO
+    shortDesc: Sending
+    longDesc: Your message has been sent to your account manager
+  ASP-0095:
+    codeType: INFO
+    shortDesc: Unable to contact account manager
+    longDesc: "{0} <br />Please contact support."
+carbon:
+  CBN-0001:
+    codeType: INFO
+    shortDesc: Datasource is created
+    longDesc: Datasource is created successfully
+  CBN-0002:
+    codeType: INFO
+    shortDesc: Success
+    longDesc: Successful Response
+  CBN-0003:
+    codeType: ERROR
+    shortDesc: Some Input field missing.
+    longDesc: Some Input field missing.
+  CBN-0004:
+    codeType: ERROR
+    shortDesc: Invalid Datasource Type.
+    longDesc: Invalid Datasource Type.
+  CBN-0005:
+    codeType: ERROR
+    shortDesc: Oops, something went wrong.
+    longDesc: Oops, something went wrong.
+  CBN-0006:
+    codeType: INFO
+    shortDesc: Datasource is deleted.
+    longDesc: Datasource is deleted successfully
+  CBN-0007:
+    codeType: ERROR
+    shortDesc: Datasource does not exists.
+    longDesc: Datasource does not exists.
+  CBN-0008:
+    codeType: CONFIRM
+    shortDesc: Datasource is already deleted.
+    longDesc: Datasource is already deleted.
+  CBN-0009:
+    codeType: INFO
+    shortDesc: DataAttributes are updated.
+    longDesc: DataAttributes are updated successfully.
+  CBN-0010:
+    codeType: ERROR
+    shortDesc: No Data Available.
+    longDesc: No Data Available.
+  CBN-0011:
+    codeType: ERROR
+    shortDesc: Allspark Api Key is unavailable.
+    longDesc: Allspark Api Key is unavailable.
+  CBN-0012:
+    codeType: INFO
+    shortDesc: Already exported.
+    longDesc: Already exported.
+  CBN-0013:
+    codeType: ERROR
+    shortDesc: Datasource Collection does not exists.
+    longDesc: Datasource Collection does not exists.
+  CBN-0014:
+    codeType: CONFIRM
+    shortDesc: IFA Upload successful
+    longDesc: IFAs uploaded successfully
+  CBN-0015:
+    codeType: INFO
+    shortDesc: Successfully exported.
+    longDesc: Successfully exported.
+  CBN-0016:
+    codeType: ERROR
+    shortDesc: Invalid Tenant.
+    longDesc: Invalid Tenant.
+  CBN-0017:
+    codeType: ERROR
+    shortDesc: Invalid Authorization
+    longDesc: Invalid Authorization Token.
+  CBN-0018:
+    codeType: ERROR
+    shortDesc: Update Error
+    longDesc: Could not update Notification Status
+  CBN-0019:
+    codeType: ERROR
+    shortDesc: Could not List Notifications.
+    longDesc: Could not List Notifications.
+  CBN-0020:
+    codeType: INFO
+    shortDesc: Plan is successfully created.
+    longDesc: Plan is successfully created.
+  CBN-0021:
+    codeType: ERROR
+    shortDesc: No Such Subscription Found
+    longDesc: No Such Subscription Found
+  CBN-0022:
+    codeType: CONFIRM
+    shortDesc: Plan is successfully Upgraded.
+    longDesc: Plan is successfully Upgraded.
+  CBN-0023:
+    codeType: INFO
+    shortDesc: Advanced Plan Request is Successfully Sent.
+    longDesc: Advanced Plan Request is Successfully Sent.
+compass:
+  CMP-0001:
+    codeType: ERROR
+    shortDesc: File Format Error
+    longDesc: Invalid input format at line %s in the file %s
+  CMP-0002:
+    codeType: ERROR
+    shortDesc: Campaign Creation Error
+    longDesc: The start date of campaign cannot be before %s days
+  CMP-0003:
+    codeType: ERROR
+    shortDesc: Campaign Creation Error
+    longDesc: The campaign should have ended in last %s days
+  CMP-0004:
+    codeType: ERROR
+    shortDesc: Campaign Creation Error
+    longDesc: Campaign name already exists. Please use a different name
+  CMP-0005:
+    codeType: CONFIRM
+    shortDesc: Campaign Created
+    longDesc: Campaign created in the system
+  CMP-0006:
+    codeType: CONFIRM
+    shortDesc: Campaign Updated
+    longDesc: Campaign updated in the system
+  CMP-0007:
+    codeType: CONFIRM
+    shortDesc: Campaign Verified
+    longDesc: Campaign Verified
+  CMP-0008:
+    codeType: CONFIRM
+    shortDesc: Uploaded Ad IDs
+    longDesc: Ad IDs uploaded in the system
+  CMP-0009:
+    codeType: CONFIRM
+    shortDesc: Uploaded Attributed stores
+    longDesc: Stores uploaded in the system
+  CMP-0010:
+    codeType: INFO
+    shortDesc: Success
+    longDesc: Successful Response
+  CMP-0011:
+    codeType: INFO
+    shortDesc: No Campaigns Available
+    longDesc: Campaigns have not been added in the system
+  CMP-0012:
+    codeType: INFO
+    shortDesc: Success
+    longDesc: Successfully uploaded
+  CMP-0014:
+    codeType: ERROR
+    shortDesc: Invalid start or end date.
+    longDesc: The start and end dates should be within 90 to 14 days prior to the
+      current date
+  CMP-0020:
+    codeType: ERROR
+    shortDesc: Campaign Creation Error
+    longDesc: Not subscribed to any plan
+  CMP-0021:
+    codeType: ERROR
+    shortDesc: Campaign Creation Error
+    longDesc: Campaign creation quota exhausted
+  CMP-0022:
+    codeType: ERROR
+    shortDesc: New subscription error
+    longDesc: Invalid input parameters
+  CMP-0023:
+    codeType: ERROR
+    shortDesc: New subscription error
+    longDesc: Trial plan subscription error
+  CMP-0029:
+    codeType: ERROR
+    shortDesc: Resource limit exceeded
+    longDesc: Upload directly to S3 and share the URL with us
+  CMP-0032:
+    codeType: ERROR
+    shortDesc: File not found in S3 location.
+    longDesc: File 'ifa.txt' does not exist in the s3 location share. Please upload
+      file with same file name.
+  CMP-0033:
+    codeType: CONFIRM
+    shortDesc: File linked with campaign
+    longDesc: File uploaded to S3, has been linked to campaign.
+  CMP-0034:
+    codeType: CONFIRM
+    shortDesc: Email sent with upload URL.
+    longDesc: We have sent an email with the path to upload ifa.txt file.
+  CMP-0037:
+    codeType: CONFIRM
+    shortDesc: Pixel tag created.
+    longDesc: Pixel tag created and sent details over email.
+  CMP-0039:
+    codeType: CONFIRM
+    shortDesc: Valid Segment id
+    longDesc: Segment id matched in our system.
+  CMP-0040:
+    codeType: ERROR
+    shortDesc: Invalid Segment id
+    longDesc: Segment id not found in our system.
+  CMP-0041:
+    codeType: CONFIRM
+    shortDesc: 'updated newsCorp Campaign '
+    longDesc: 'updated newsCorp Campaign '
+  CMP-0042:
+    codeType: CONFIRM
+    shortDesc: 'Get NewsCorp Campaign '
+    longDesc: 'Get NewsCorp Campaign '
+  CMP-0043:
+    codeType: CONFIRM
+    shortDesc: upload news corp json to s3
+    longDesc: upload news corp json to s3
+  CMP-0044:
+    codeType: INFO
+    shortDesc: 'Get NewsCorp Campaign '
+    longDesc: 'Get NewsCorp Campaign '
+  CMP-0045:
+    codeType: INFO
+    shortDesc: trigger info
+    longDesc: trigger info
+mypage:
+  NMP-0001:
+    codeType: CONFIRM
+    shortDesc: Page Created Successfully
+    longDesc: The page was created successfully and is available for use now.
+  NMP-0002:
+    codeType: CONFIRM
+    shortDesc: Card Created Successfully
+    longDesc: The card was created successfully and is available for use now.
+  NMP-0003:
+    codeType: CONFIRM
+    shortDesc: Menu Item Created Successfully
+    longDesc: The menu item was created successfully and is available for use now.
+  NMP-0004:
+    codeType: CONFIRM
+    shortDesc: Menu Category Created Successfully
+    longDesc: The menu category was created successfully and is available for use
+      now.
+  NMP-0005:
+    codeType: ERROR
+    shortDesc: Could not create Page
+    longDesc: The page could not be created. Please check the input given. Make sure
+      you are not creating page with name that already exists.
+  NMP-0006:
+    codeType: ERROR
+    shortDesc: Could not create Card
+    longDesc: The card could not be created. Please check the input given. Make sure
+      you are not creating card with name that already exists.
+  NMP-0007:
+    codeType: ERROR
+    shortDesc: Could not create Menu Item
+    longDesc: The Menu Item could not be created. Please check the input given. Make
+      sure you are not creating Menu Item with name that already exists.
+  NMP-0008:
+    codeType: ERROR
+    shortDesc: Could not create Menu Category
+    longDesc: The Menu Category could not be created. Please check the input given.
+      Make sure you are not creating Menu category with name that already exists.
+  NMP-0009:
+    codeType: CONFIRM
+    shortDesc: Page Deleted Successfully
+    longDesc: The requested page was deleted successfully and will not be available
+      in your dashboard anymore.
+  NMP-0010:
+    codeType: CONFIRM
+    shortDesc: Card Deleted Successfully
+    longDesc: The requested card was deleted successfully and will not be available
+      in your dashboard anymore.
+  NMP-0011:
+    codeType: CONFIRM
+    shortDesc: Menu Item Deleted Successfully
+    longDesc: The requested Menu Item was deleted successfully and will not be available
+      in your dashboard anymore.
+  NMP-0012:
+    codeType: CONFIRM
+    shortDesc: Menu Category Deleted Successfully
+    longDesc: The requested Menu Category was deleted successfully and will not be
+      available in your dashboard anymore.
+  NMP-0013:
+    codeType: ERROR
+    shortDesc: Could not Delete Page
+    longDesc: The requested page could not be deleted. Please try again.
+  NMP-0014:
+    codeType: ERROR
+    shortDesc: Could not Delete Card
+    longDesc: The requested card could not be deleted. Please try again.
+  NMP-0015:
+    codeType: ERROR
+    shortDesc: Could not Delete Menu Item
+    longDesc: The requested menu item could not be deleted. Please try again.
+  NMP-0016:
+    codeType: ERROR
+    shortDesc: Could not Delete Menu Category
+    longDesc: The requested menu category could not be deleted. Please try again.
+  NMP-0017:
+    codeType: INFO
+    shortDesc: Fetched the requested page
+    longDesc: Details of the requested page have been fetched successfully.
+  NMP-0018:
+    codeType: INFO
+    shortDesc: Fetched the requested card
+    longDesc: Details of the requested card have been fetched successfully.
+  NMP-0019:
+    codeType: INFO
+    shortDesc: Fetched the requested Menu Item
+    longDesc: Details of the requested menu item have been fetched successfully.
+  NMP-0020:
+    codeType: INFO
+    shortDesc: Fetched the requested Menu Category
+    longDesc: Details of the requested menu category have been fetched successfully.
+  NMP-0021:
+    codeType: ERROR
+    shortDesc: Could not fetch the requested Page
+    longDesc: Could not fetch the requested page. Please refresh you page and try
+      again.
+  NMP-0022:
+    codeType: ERROR
+    shortDesc: Could not fetch the requested Card
+    longDesc: Could not fetch the requested Card. Please refresh you page and try
+      again.
+  NMP-0023:
+    codeType: ERROR
+    shortDesc: Could not fetch the requested Menu Item
+    longDesc: Could not fetch the requested menu item. Please refresh you page and
+      try again.
+  NMP-0024:
+    codeType: ERROR
+    shortDesc: Could not fetch the requested Menu Category
+    longDesc: Could not fetch the requested menu category. Please refresh you page
+      and try again.
+  NMP-0025:
+    codeType: CONFIRM
+    shortDesc: Updated the Page successfully
+    longDesc: Updated the page with requested modifications.
+  NMP-0026:
+    codeType: CONFIRM
+    shortDesc: Updated the Card successfully
+    longDesc: Updated the card with requested modifications.
+  NMP-0027:
+    codeType: CONFIRM
+    shortDesc: Updated the Menu Item successfully
+    longDesc: Updated the menu item with requested modifications.
+  NMP-0028:
+    codeType: CONFIRM
+    shortDesc: Updated the Menu Category successfully
+    longDesc: Updated the menu category with requested modifications.
+  NMP-0029:
+    codeType: ERROR
+    shortDesc: Failed to update Page
+    longDesc: Could not update the page with requested modifications. Please make
+      sure that the details entered do not match any existing page.
+  NMP-0030:
+    codeType: ERROR
+    shortDesc: Failed to update Card
+    longDesc: Could not update the card with requested modifications. Please make
+      sure that the details entered do not match any existing card.
+  NMP-0031:
+    codeType: ERROR
+    shortDesc: Failed to update Menu Item
+    longDesc: Could not update the menu item with requested modifications. Please
+      make sure that the details entered do not match any existing menu item.
+  NMP-0032:
+    codeType: ERROR
+    shortDesc: Failed to update Menu Category
+    longDesc: Could not update the menu category with requested modifications. Please
+      make sure that the details entered do not match any existing menu category.
+  NMP-0033:
+    codeType: CONFIRM
+    shortDesc: Card Linked Successfully
+    longDesc: This card has been successfully linked to the requested Page and will
+      be available for use now.
+  NMP-0034:
+    codeType: CONFIRM
+    shortDesc: Card Un-Linked Successfully
+    longDesc: This card has been successfully Un-linked from the requested Page and
+      will not be available for anymore.
+  NMP-0035:
+    codeType: CONFIRM
+    shortDesc: Page Cloned Successfully
+    longDesc: The requested Page has been Cloned Successfully and is available for
+      use now.
+  NMP-0036:
+    codeType: CONFIRM
+    shortDesc: Card Cloned Successfully
+    longDesc: The requested Card has been Cloned Successfully and is available for
+      use now.
+  NMP-0037:
+    codeType: CONFIRM
+    shortDesc: Menu Item Cloned Successfully
+    longDesc: The requested Menu Item has been Cloned Successfully and is available
+      for use now.
+  NMP-0038:
+    codeType: CONFIRM
+    shortDesc: Menu Category Cloned Successfully
+    longDesc: The requested Menu Category has been Cloned Successfully and is available
+      for use now.
+  NMP-0039:
+    codeType: CONFIRM
+    shortDesc: Card Added to Favorites Successfully
+    longDesc: Requested Card has been added as a Favorites of yours now.
+  NMP-0040:
+    codeType: WARN
+    shortDesc: Could not Link the requested Card
+    longDesc: Failed to Link this Card to the requested Page. Please refresh and try
+      again.
+  NMP-0041:
+    codeType: ERROR
+    shortDesc: Could not Un-Link the requested Card
+    longDesc: Failed to Un-Link this Card to the requested Page. Card not linked to
+      this Page.
+  NMP-0042:
+    codeType: ERROR
+    shortDesc: Could not Clone the requested Page
+    longDesc: Failed to Clone the requested Page. Please refresh and try again.
+  NMP-0043:
+    codeType: ERROR
+    shortDesc: Could not Clone the requested Card
+    longDesc: Failed to Clone the requested Card.Please refresh and try again.
+  NMP-0044:
+    codeType: ERROR
+    shortDesc: Could not Clone the requested Menu Item
+    longDesc: Failed to Clone the requested Menu Item. Please refresh and try again.
+  NMP-0045:
+    codeType: ERROR
+    shortDesc: Could not Clone the requested Menu Category
+    longDesc: Failed to Clone the requested Menu Category. Please refresh and try
+      again.
+  NMP-0046:
+    codeType: ERROR
+    shortDesc: Failed to add Card as Favorites
+    longDesc: Failed to add this card to Favorites. Please refresh and try again.
+  NMP-0047:
+    codeType: ERROR
+    shortDesc: Page ID not found
+    longDesc: Page ID could not be found in the database. Please validate the Page
+      ID given and try again.
+  NMP-0048:
+    codeType: ERROR
+    shortDesc: Page Name invalid
+    longDesc: Page Name not valid. Please provide a proper page Name and try again.
+  NMP-0049:
+    codeType: ERROR
+    shortDesc: Page Description invalid
+    longDesc: Page Description not valid. Please provide a proper Page Description
+      and try again.
+  NMP-0050:
+    codeType: INFO
+    shortDesc: No cards available to link.
+    longDesc: No card ID has been provided to link it to this Page.
+  NMP-0051:
+    codeType: ERROR
+    shortDesc: Could not link Card
+    longDesc: Requested Card already linked to this specific Page.
+  NMP-0052:
+    codeType: ERROR
+    shortDesc: Card ID invalid
+    longDesc: Could not find given Card ID in the database. Please check the input
+      and try again.
+  NMP-0053:
+    codeType: ERROR
+    shortDesc: Card Description not provided
+    longDesc: Card Description is not valid. Please check the description provided
+      and try again.
+  NMP-0054:
+    codeType: ERROR
+    shortDesc: Card Render type invalid
+    longDesc: Please check the Card Render type provided. Type seems to be invalid
+      and not processable.
+  NMP-0055:
+    codeType: ERROR
+    shortDesc: Card Content invalid
+    longDesc: Card Content invalid. Please check the card content provided and try
+      again.
+  NMP-0056:
+    codeType: ERROR
+    shortDesc: Card Favorite option invalid.
+    longDesc: Provided Favorite value for this card is invalid. Please mention True
+      (or) False and try again.
+  NMP-0057:
+    codeType: ERROR
+    shortDesc: Could not clone.
+    longDesc: Given Card is not linked to given Page. Please make sure the requested
+      Page and Card are linked.
+  NMP-0058:
+    codeType: ERROR
+    shortDesc: Page name exists.
+    longDesc: Page name provided already exists. Please provide a different Page name.
+  NMP-0059:
+    codeType: CONFIRM
+    shortDesc: Card rated
+    longDesc: Card rating updated
+  NMP-0060:
+    codeType: CONFIRM
+    shortDesc: Page Shared Successfully.
+    longDesc: Requested Page has been shared to the requested person successfully.
+  NMP-0061:
+    codeType: CONFIRM
+    shortDesc: Upload Successful
+    longDesc: The image has been successfully uploaded
+  NMP-0062:
+    codeType: ERROR
+    shortDesc: Default Page already set
+    longDesc: There is an existing default page
+  NMP-0063:
+    codeType: CONFIRM
+    shortDesc: Card Rendered
+    longDesc: The contents have been rendered successfully
+  NMP-0064:
+    codeType: ERROR
+    shortDesc: Requester Required
+    longDesc: Requester id is required
+  NMP-0065:
+    codeType: ERROR
+    shortDesc: Update not possible
+    longDesc: Update not possible as the user does not own this page.
+  NMP-0066:
+    codeType: CONFIRM
+    shortDesc: Linked Menu Item successfully
+    longDesc: Linked Menu Item successfully
+  NMP-0067:
+    codeType: CONFIRM
+    shortDesc: Item unlinked successfully
+    longDesc: Item unlinked successfully
+  NMP-0068:
+    codeType: ERROR
+    shortDesc: Invalid credentials
+    longDesc: Could not processed, as invalid User details
+  NMP-0069:
+    codeType: ERROR
+    shortDesc: Invalid Category Id
+    longDesc: Could not processed as invalid CategoryId
+  NMP-0070:
+    codeType: ERROR
+    shortDesc: Invalid Menu Item Id
+    longDesc: Could not processed as invalid Menu Item Id
+places:
+  NPL-0001:
+    codeType: CONFIRM
+    shortDesc: Upload Success
+    longDesc: File Uploaded Successfully, you will receive a mail with download link
+      for the processed file once the Conversion process is completed
+  NPL-0002:
+    codeType: ERROR
+    shortDesc: Upload Failed
+    longDesc: Uploaded file is empty or invalid. Please verify the file you've uploaded
+      and try again.
+  NPL-0003:
+    codeType: CONFIRM
+    shortDesc: Upload Success
+    longDesc: File Uploaded Successfully, you will receive a mail with download link
+      for the processed file once the Geo-coding process is completed
+  NPL-0004:
+    codeType: CONFIRM
+    shortDesc: Upload Success
+    longDesc: File Uploaded Successfully, you will receive a mail with download link
+      for the processed file once the Reverse Geo-coding process is completed
+  NPL-0005:
+    codeType: ERROR
+    shortDesc: Address not found
+    longDesc: Address could not be found or improper address provided. Please try
+      again with proper address.
+  NPL-0006:
+    codeType: ERROR
+    shortDesc: Invalid Coordinates
+    longDesc: Invalid Coordinates provided. Please try again with proper Coordinates.
+  NPL-0007:
+    codeType: ERROR
+    shortDesc: Invalid Input
+    longDesc: Please check the input provided. Make sure you provide valid values.
+  NPL-0008:
+    codeType: ERROR
+    shortDesc: Invalid Geohash
+    longDesc: Please check the Geohash provided. Provided Geohash is invalid or incorrect.
+  NPL-0009:
+    codeType: CONFIRM
+    shortDesc: Invalid H3
+    longDesc: Please check the H3 provided. Provided H3 is invalid or incorrect.
+  NPL-0010:
+    codeType: CONFIRM
+    shortDesc: Upload Success
+    longDesc: File Uploaded Successfully, you will receive a mail with download link
+      for the processed file once the Geo-hashing process is completed
+  NPL-0011:
+    codeType: ERROR
+    shortDesc: Category creation failed
+    longDesc: Category name is missing. Please enter a valid category name.
+  NPL-0012:
+    codeType: ERROR
+    shortDesc: Category creation failed
+    longDesc: Please check category level. Provided category level is missing or incorrect.
+  NPL-0013:
+    codeType: ERROR
+    shortDesc: Category creation failed
+    longDesc: Please check category parent name. Provided parent name is  missing
+      or invalid.
+  NPL-0014:
+    codeType: ERROR
+    shortDesc: Category creation failed!
+    longDesc: Please enter a valid access key. Provided key is invalid or missing
+  NPL-0015:
+    codeType: ERROR
+    shortDesc: Category creation failed!!
+    longDesc: Category can't be created for the provided inputs
+  NPL-0016:
+    codeType: ERROR
+    shortDesc: Category creation failed!!
+    longDesc: Category with provided inputs is already present
+  NPL-0017:
+    codeType: CONFIRM
+    shortDesc: Category created successfully!!
+    longDesc: Category created successfully
+  NPL-0018:
+    codeType: ERROR
+    shortDesc: Query Failed!!
+    longDesc: Could not fetch data for the provided inputs
+  NPL-0019:
+    codeType: CONFIRM
+    shortDesc: Fetching Successful!!
+    longDesc: Successfully fetch the Category responses.
+  NPL-0020:
+    codeType: ERROR
+    shortDesc: Response failed!!
+    longDesc: Could not fetch output in CSV format.
+  NPL-0021:
+    codeType: ERROR
+    shortDesc: Error!!
+    longDesc: Internal Error Occurred.
+  NPL-0022:
+    codeType: CONFIRM
+    shortDesc: Category tags updated!!
+    longDesc: successfully updated the tags for given category.
+  NPL-0023:
+    codeType: ERROR
+    shortDesc: Update failed!!
+    longDesc: Could not update tags for provided inputs. Please verify the given inputs.
+  NPL-0024:
+    codeType: CONFIRM
+    shortDesc: Fetching Successful!!
+    longDesc: 'Successfully fetch the  POI List responses. '
+  NPL-0025:
+    codeType: ERROR
+    shortDesc: POI List tags updated!!
+    longDesc: Successfully updated the tags for given POI List.
+  NPL-0026:
+    codeType: CONFIRM
+    shortDesc: Fetching Successful!!
+    longDesc: Successfully fetch the Admin region data.
+  NPL-0027:
+    codeType: ERROR
+    shortDesc: Query Failed!!
+    longDesc: Could not fetch Admin Region data for provided Inputs.
+  NPL-0028:
+    codeType: CONFIRM
+    shortDesc: IDs created Successfully!
+    longDesc: New Ids are successfully set to Admin Regions.
+  NPL-0029:
+    codeType: ERROR
+    shortDesc: IDs creations failed!!
+    longDesc: Couldn't create new Ids for provided inputs.
+  NPL-0030:
+    codeType: CONFIRM
+    shortDesc: Successfully Update!!
+    longDesc: Successfully update the Admin Region.
+  NPL-0031:
+    codeType: ERROR
+    shortDesc: Update Failed!!
+    longDesc: Couldn't update Admin Region for provided Inputs.
+  NPL-0032:
+    codeType: ERROR
+    shortDesc: Query Failed!!
+    longDesc: Couldn't fetch super categories for provided inputs.
+  NPL-0033:
+    codeType: CONFIRM
+    shortDesc: Fetching Successful!!
+    longDesc: Successfully fetch the super categories.
+  NPL-0034:
+    codeType: ERROR
+    shortDesc: Building Creation failed!
+    longDesc: new Building can not be created for provided Inputs.
+  NPL-0035:
+    codeType: CONFIRM
+    shortDesc: Building creation successful!!
+    longDesc: New Building created successfully.
+  NPL-0036:
+    codeType: ERROR
+    shortDesc: Query failed!
+    longDesc: Couldn't fetch Buildings for provided Inputs.
+  NPL-0037:
+    codeType: CONFIRM
+    shortDesc: Fetching Successful!
+    longDesc: Successfully fetch the Building Data.
+  NPL-0038:
+    codeType: ERROR
+    shortDesc: Section Creation Failed!!
+    longDesc: Section can not be created for provided inputs.
+  NPL-0039:
+    codeType: CONFIRM
+    shortDesc: Section Creation Successful!
+    longDesc: New Section Created Successfully.
+  NPL-0040:
+    codeType: ERROR
+    shortDesc: Fetching failed!
+    longDesc: Couldn't fetch a Section for provided Inputs.
+  NPL-0041:
+    codeType: CONFIRM
+    shortDesc: Fetching Successful!
+    longDesc: Successfully fetch the Section Data.
+  NPL-0042:
+    codeType: ERROR
+    shortDesc: Query Failed!
+    longDesc: Couldn't fetch the POI response for the provided inputs.
+  NPL-0043:
+    codeType: CONFIRM
+    shortDesc: Fetching Successful!!
+    longDesc: Successfully fetch the POI responses.
+  NPL-0044:
+    codeType: ERROR
+    shortDesc: Country not found!!
+    longDesc: Provided Near-Poi-Id is not valid, please provide a valid Id.
+  NPL-0045:
+    codeType: ERROR
+    shortDesc: Place creation failed!!
+    longDesc: Couldn't create new place for the provided Inputs.
+  NPL-0046:
+    codeType: CONFIRM
+    shortDesc: Creation Successful!!
+    longDesc: New place is created successfully.
+  NPL-0047:
+    codeType: ERROR
+    shortDesc: POI Update failed!!
+    longDesc: Couldn't update POI for provided Inputs.
+  NPL-0048:
+    codeType: CONFIRM
+    shortDesc: POI Update Successful!!
+    longDesc: Successfully update the POIs.
+  NPL-0049:
+    codeType: ERROR
+    shortDesc: 'Failed to Delete!! '
+    longDesc: Couldn't delete a POI for provided inputs.
+  NPL-0050:
+    codeType: CONFIRM
+    shortDesc: Deletion successful!!
+    longDesc: Deleted POIs Successfully.
+  NPL-0051:
+    codeType: ERROR
+    shortDesc: Query Failed!!
+    longDesc: Couldn't Fetch an Event for the provided inputs.
+  NPL-0052:
+    codeType: CONFIRM
+    shortDesc: Fetching Successful!!
+    longDesc: Successfully fetch the Event responses.
+  NPL-0053:
+    codeType: ERROR
+    shortDesc: Creation Failed!!
+    longDesc: Couldn't create a new Event  for provided Inputs.
+  NPL-0054:
+    codeType: CONFIRM
+    shortDesc: Creation Successful!!
+    longDesc: New Event is created successfully.
+  NPL-0055:
+    codeType: ERROR
+    shortDesc: Update Failed!
+    longDesc: Couldn't Update the Event for Provided Inputs
+  NPL-0056:
+    codeType: CONFIRM
+    shortDesc: Update successful!!
+    longDesc: Successfully update an Event.
+  NPL-0057:
+    codeType: ERROR
+    shortDesc: Deletion Failed!!
+    longDesc: An Event Couldn't be Deleted for provided Inputs.
+  NPL-0058:
+    codeType: CONFIRM
+    shortDesc: Deletion Successful!!
+    longDesc: Deleted Events Successfully.
+  NPL-0059:
+    codeType: ERROR
+    shortDesc: Query Failed!!
+    longDesc: Couldn't not fetch Analytics data for provided inputs.
+  NPL-0060:
+    codeType: CONFIRM
+    shortDesc: Fetching Successful!!
+    longDesc: Successfully fetch the Analytics Data.
+engage:
+  ENG-0001:
+    codeType: ERROR
+    shortDesc: Mandatory Field Missing
+    longDesc: "%s is mandatory"
+  ENG-0002:
+    codeType: CONFIRM
+    shortDesc: Advertiser created
+    longDesc: Advertiser created successfully
+  ENG-0003:
+    codeType: INFO
+    shortDesc: Advertiser Fetched
+    longDesc: Advertiser Details Fetched
+  ENG-0004:
+    codeType: INFO
+    shortDesc: Advertisers Fetched
+    longDesc: Advertisers List Fetched
+  ENG-0005:
+    codeType: ERROR
+    shortDesc: Invalid Website
+    longDesc: Please enter a valid website URL
+  ENG-0006:
+    codeType: ERROR
+    shortDesc: Please check website
+    longDesc: The entered website exceeds 100 characters
+  ENG-0007:
+    codeType: INFO
+    shortDesc: Search Results Fetched
+    longDesc: Search Results Fetched Successfully
+  ENG-0008:
+    codeType: INFO
+    shortDesc: 'Fetched Count '
+    longDesc: Fetched Count Successfully
+  ENG-0009:
+    codeType: ERROR
+    shortDesc: No Match Found
+    longDesc: No match found for the keyword
+  ENG-0010:
+    codeType: CONFIRM
+    shortDesc: Update successful
+    longDesc: Advertiser record updated successfully
+  ENG-0011:
+    codeType: ERROR
+    shortDesc: Page not available
+    longDesc: Requested page is not available
+  ENG-0012:
+    codeType: ERROR
+    shortDesc: Should be a valid email id
+    longDesc: Invalid email
+  ENG-0013:
+    codeType: ERROR
+    shortDesc: Invalid password
+    longDesc: Invalid password
+  ENG-0014:
+    codeType: CONFIRM
+    shortDesc: An email has been sent with the password reset link
+    longDesc: An email has been sent with the password reset link
+  ENG-0015:
+    codeType: INFO
+    shortDesc: Password Criteria
+    longDesc: Password should be a combination of at least 7 characters, 1 number,
+      1 uppercase letter, 1 lowercase letter, one special character. It cannot be
+      same as the last used password.
+  ENG-0016:
+    codeType: ERROR
+    shortDesc: Password Criteria failed
+    longDesc: Password does not meet the criteria
+  ENG-0017:
+    codeType: ERROR
+    shortDesc: Passwords doesn't match
+    longDesc: Passwords doesn't match
+  ENG-0018:
+    codeType: ERROR
+    shortDesc: Please enter a unique value
+    longDesc: "%s already exists. Please enter a unique name"
+  ENG-0019:
+    codeType: ERROR
+    shortDesc: Comments length exceeded
+    longDesc: Comments cannot be more than 200 characters
+  ENG-0020:
+    codeType: ERROR
+    shortDesc: 'There are unsaved changes which will be lost. Are you sure you want
+      to continue? '
+    longDesc: 'There are unsaved changes which will be lost. Are you sure you want
+      to continue? '
+  ENG-0021:
+    codeType: ERROR
+    shortDesc: Amount or numeric field validation failed
+    longDesc: Please enter a positive numeric value or adjust the decimals to two
+      places
+  ENG-0022:
+    codeType: CONFIRM
+    shortDesc: Confirmation on removal of places
+    longDesc: Selecting a different country will remove the places that are already
+      selected. Are you sure you want to continue?
+  ENG-0023:
+    codeType: ERROR
+    shortDesc: Invalid file format or file size is more than 512 MB
+    longDesc: Invalid file format or file size is more than 512 MB
+  ENG-0024:
+    codeType: ERROR
+    shortDesc: Invalid content
+    longDesc: Invalid content
+  ENG-0025:
+    codeType: CONFIRM
+    shortDesc: Insertion order created
+    longDesc: Insertion order created successfully
+  ENG-0026:
+    codeType: CONFIRM
+    shortDesc: Object created successfully
+    longDesc: "%s has been created successfully"
+  ENG-0027:
+    codeType: INFO
+    shortDesc: Deselect OMP if the campaign is expected to run only on PMP
+    longDesc: Deselect OMP if the campaign is expected to run only on PMP
+  ENG-0028:
+    codeType: INFO
+    shortDesc: fetch success
+    longDesc: "%s fetched successfully"
+  ENG-0029:
+    codeType: INFO
+    shortDesc: Insertion order details fetched
+    longDesc: Insertion order details fetched successfully
+  ENG-0030:
+    codeType: ERROR
+    shortDesc: Invalid Deal Token. It can have alphabets & numbers with underscore,
+      hyphen & dot.
+    longDesc: Invalid Deal Token. It can have alphabets & numbers with underscore,
+      hyphen & dot.
+  ENG-0031:
+    codeType: CONFIRM
+    shortDesc: Insertion order details updated
+    longDesc: Insertion order details updated successfully
+  ENG-0032:
+    codeType: WARN
+    shortDesc: Daily budget entered may lead to under-pacing or over-pacing.
+    longDesc: Daily budget entered may lead to under-pacing or over-pacing.
+  ENG-0033:
+    codeType: ERROR
+    shortDesc: Campaign budget cannot be more than remaining IO amount
+    longDesc: "%s cannot be more than remaining %s"
+  ENG-0034:
+    codeType: INFO
+    shortDesc: Information to user about rich media creatives and engagement macros
+    longDesc: Please make sure that rich media creatives are assigned and engagement
+      macros are appended to track overall engagement for optimisation and reporting.
+  ENG-0035:
+    codeType: ERROR
+    shortDesc: Please select at least one exchange
+    longDesc: Please select at least one exchange
+  ENG-0036:
+    codeType: ERROR
+    shortDesc: End date cannot be more than campaign's end date
+    longDesc: End date cannot be more than campaign's end date
+  ENG-0037:
+    codeType: INFO
+    shortDesc: Supply strategy modified
+    longDesc: Supply strategy has been modified
+  ENG-0038:
+    codeType: INFO
+    shortDesc: Creative is under review
+    longDesc: Creative is under review
+  ENG-0039:
+    codeType: CONFIRM
+    shortDesc: Creative Created
+    longDesc: Creative Created Successfully
+  ENG-0040:
+    codeType: CONFIRM
+    shortDesc: Updated successfully
+    longDesc: Updated successfully
+  ENG-0041:
+    codeType: INFO
+    shortDesc: Creative Fetched
+    longDesc: Creative Fetched Successfully
+  ENG-0042:
+    codeType: INFO
+    shortDesc: Success
+    longDesc: Success Response Received
+  ENG-0043:
+    codeType: CONFIRM
+    shortDesc: Confirmation on activating paused line items.
+    longDesc: Do you also want to activate all the paused line items that are assigned
+      to this campaign?
+  ENG-0044:
+    codeType: CONFIRM
+    shortDesc: Are you sure you want to end
+    longDesc: Are you sure you want to end the %s?
+  ENG-0045:
+    codeType: CONFIRM
+    shortDesc: Are you sure
+    longDesc: Are you sure you want to %s %s strategy?
+  ENG-0046:
+    codeType: ERROR
+    shortDesc: 'Please assign a weightage to all the creatives '
+    longDesc: 'Please assign a weightage to all the creatives '
+  ENG-0047:
+    codeType: ERROR
+    shortDesc: Please assign right creative format. Rejected creatives are not allowed
+      to be assigned.
+    longDesc: Please assign right creative format. Rejected creatives are not allowed
+      to be assigned.
+  ENG-0048:
+    codeType: CONFIRM
+    shortDesc: Are you sure you want to remove this creative from this line item?
+    longDesc: Are you sure you want to remove this creative from this line item?
+  ENG-0049:
+    codeType: ERROR
+    shortDesc: Frequency cap of line item should less than or equal to the frequency
+      cap of the campaign.
+    longDesc: Frequency cap of line item should less than or equal to the frequency
+      cap of the campaign.
+  ENG-0050:
+    codeType: INFO
+    shortDesc: Use "Lifetime" to avoid underspending or irregular spending. Daily
+      spend target is calculated automatically based on the pacing setting.
+    longDesc: Use "Lifetime" to avoid underspending or irregular spending. Daily spend
+      target is calculated automatically based on the pacing setting.
+  ENG-0051:
+    codeType: ERROR
+    shortDesc: Duplicate IO Number entered
+    longDesc: IO number already exists. Please enter a unique number.
+  ENG-0052:
+    codeType: INFO
+    shortDesc: fetch success
+    longDesc: "%s fetched successfully"
+  ENG-0053:
+    codeType: ERROR
+    shortDesc: Invalid format or file size
+    longDesc: Invalid format or file size
+  ENG-0054:
+    codeType: ERROR
+    shortDesc: Invalid LP URL
+    longDesc: Invalid LP URL
+  ENG-0055:
+    codeType: ERROR
+    shortDesc: Invalid phone number
+    longDesc: Invalid phone number
+  ENG-0056:
+    codeType: INFO
+    shortDesc: Checking macros is mandatory
+    longDesc: Checking macros is mandatory
+  ENG-0057:
+    codeType: ERROR
+    shortDesc: Character limit exceeds
+    longDesc: "%s - Character limit exceeds"
+  ENG-0058:
+    codeType: INFO
+    shortDesc: Download the complete report
+    longDesc: Download the complete report
+  ENG-0059:
+    codeType: ERROR
+    shortDesc: At least 1 metric should be selected
+    longDesc: Select at least 1 metric to generate the report
+  ENG-0060:
+    codeType: INFO
+    shortDesc: Moments list fetched
+    longDesc: Moments list fetched successfully
+  ENG-0061:
+    codeType: CONFIRM
+    shortDesc: updated successfully
+    longDesc: "%s has been updated successfully"
+  ENG-0062:
+    codeType: ERROR
+    shortDesc: maximum of 100 characters
+    longDesc: "%s can be a maximum of 100 characters"
+  ENG-0063:
+    codeType: CONFIRM
+    shortDesc: Confirmation on moments targeting changes
+    longDesc: Changing the moment targeting may impact all the campaigns/line-items
+      that are using this particular moment. Are you sure you want to continue?
+  ENG-0064:
+    codeType: ERROR
+    shortDesc: Not found
+    longDesc: "%s not found"
+  ENG-0065:
+    codeType: ERROR
+    shortDesc: Error on Upload
+    longDesc: Error occurred in the upload file
+  ENG-0066:
+    codeType: ERROR
+    shortDesc: Website Cannot be Changed
+    longDesc: Website cannot be changed since IO associated with the Advertiser
+  ENG-0067:
+    codeType: ERROR
+    shortDesc: Not valid Date Range
+    longDesc: Please enter a Valid Date Range
+  ENG-0068:
+    codeType: CONFIRM
+    shortDesc: Confirmation for deactivation
+    longDesc: Do you want to deactivate the %s?
+  ENG-0069:
+    codeType: CONFIRM
+    shortDesc: Confirmation for activation
+    longDesc: Do you want to activate the %s?
+  ENG-0070:
+    codeType: ERROR
+    shortDesc: User already exist
+    longDesc: User already exist in the system
+  ENG-0071:
+    codeType: CONFIRM
+    shortDesc: Confirmation for approval
+    longDesc: Are you sure you want to approve the %?
+  ENG-0072:
+    codeType: CONFIRM
+    shortDesc: Confirmation for rejection
+    longDesc: Are you sure you want to reject the %?
+  ENG-0074:
+    codeType: CONFIRM
+    shortDesc: Campaign started
+    longDesc: Campaign started successfully
+  ENG-0075:
+    codeType: CONFIRM
+    shortDesc: Campaign stopped
+    longDesc: Campaign stopped successfully
+  ENG-0076:
+    codeType: CONFIRM
+    shortDesc: At least one deal is mandatory
+    longDesc: PMP strategy will be deselected if no deal is selected.
+  ENG-0077:
+    codeType: ERROR
+    shortDesc: Bid Price cannot be more than Line Item CPM
+    longDesc: Please enter a price that is less than or equal to the Line Item CPM.
+  ENG-0078:
+    codeType: ERROR
+    shortDesc: Please initiate the Campaign
+    longDesc: Please initiate the Campaign
+  ENG-0079:
+    codeType: ERROR
+    shortDesc: Not valid format
+    longDesc: Please upload a valid csv file
+  ENG-0080:
+    codeType: ERROR
+    shortDesc: Please select type
+    longDesc: Please select type before upload
+  ENG-0081:
+    codeType: ERROR
+    shortDesc: Invalid File
+    longDesc: The csv is not valid for the %s type selection
+  ENG-0082:
+    codeType: ERROR
+    shortDesc: More than ten cards selected
+    longDesc: 'No more than ten cards can be selected '
+  ENG-0083:
+    codeType: ERROR
+    shortDesc: Multiple Impression trackers not allowed
+    longDesc: Multiple Impression trackers not allowed
+  ENG-0084:
+    codeType: ERROR
+    shortDesc: IO budget less
+    longDesc: IO budget cannot be less than allocated Campaign budget
+  ENG-0085:
+    codeType: ERROR
+    shortDesc: Campaign budget cannot be less
+    longDesc: Campaign budget cannot be less than allocated Line Item budget
+  ENG-0086:
+    codeType: ERROR
+    shortDesc: Oops, something went wrong
+    longDesc: Oops, something went wrong
+  ENG-0087:
+    codeType: INFO
+    shortDesc: Success
+    longDesc: Successfully retrieved the stats
+  ENG-0088:
+    codeType: INFO
+    shortDesc: Success
+    longDesc: Strategy id passed doesn't exist
+  ENG-0089:
+    codeType: ERROR
+    shortDesc: Mandatory Reporting Parameter Missing
+    longDesc: At least one dimension and at least one metric is mandatory
+  ENG-0090:
+    codeType: INFO
+    shortDesc: Success
+    longDesc: Successfully retrieved the dimensions and metrics list
+  ENG-0091:
+    codeType: ERROR
+    shortDesc: Failure
+    longDesc: Invalid pagination parameter passed
+  ENG-0092:
+    codeType: ERROR
+    shortDesc: Mandatory Field Missing
+    longDesc: "%s is mandatory"
+  ENG-0093:
+    codeType: INFO
+    shortDesc: Success
+    longDesc: Successfully downloaded the report
+  ENG-0094:
+    codeType: ERROR
+    shortDesc: Line Item save failed
+    longDesc: The Strategies could not be build for the Line Item. Please check the
+      entered details again.
+  ENG-0095:
+    codeType: ERROR
+    shortDesc: Please enter a positive value
+    longDesc: Please enter a positive value
+  ENG-0096:
+    codeType: ERROR
+    shortDesc: Invalid Impression Tracker
+    longDesc: Invalid Impression Tracker
+  ENG-0097:
+    codeType: ERROR
+    shortDesc: Invalid Vast Tag
+    longDesc: Invalid Vast Tag
+  ENG-0098:
+    codeType: ERROR
+    shortDesc: LineItem could not be saved.
+    longDesc: Please check the schedule settings again
+  ENG-0099:
+    codeType: ERROR
+    shortDesc: Please select right set of Creatives
+    longDesc: Please select right set of Creatives
+  ENG-0100:
+    codeType: ERROR
+    shortDesc: Invalid RichMedia Tag
+    longDesc: Invalid RichMedia Tag
+  ENG-0101:
+    codeType: ERROR
+    shortDesc: Advertiser Not Approved
+    longDesc: Creative cannot be approved without Advertiser Approval
+  ENG-0102:
+    codeType: ERROR
+    shortDesc: Please assign valid IAB Category
+    longDesc: Please assign valid IAB Category before update
+  ENG-0103:
+    codeType: ERROR
+    shortDesc: No Line Items under the campaign
+    longDesc: No Line Items under the Campaign to start
+  ENG-0104:
+    codeType: ERROR
+    shortDesc: Cannot activate the Campaign
+    longDesc: Cannot activate the campaign since end date passed.
+  ENG-0105:
+    codeType: ERROR
+    shortDesc: Cannot activate Line Item
+    longDesc: Cannot activate Line Item as end date passed
+  ENG-0106:
+    codeType: ERROR
+    shortDesc: Creative Under Review
+    longDesc: Campaign cannot start unless the creatives are approved
+  ENG-0107:
+    codeType: ERROR
+    shortDesc: Cannot Add Under Preview Creative
+    longDesc: Creatives under review cannot be assigned to an active campaign
+  ENG-0108:
+    codeType: ERROR
+    shortDesc: Budget cannot be changed
+    longDesc: The updated budget is less than the spend for the %s
+  ENG-0109:
+    codeType: ERROR
+    shortDesc: Please select the appropriate category
+    longDesc: Please select the appropriate category
+  ENG-0110:
+    codeType: CONFIRM
+    shortDesc: Report Saved
+    longDesc: Report Saved Successfully
+  ENG-0111:
+    codeType: CONFIRM
+    shortDesc: Report Selection Updated
+    longDesc: Report Selection Updated
+  ENG-0112:
+    codeType: CONFIRM
+    shortDesc: Fetched Saved Reports
+    longDesc: Fetched Saved Reports
+  ENG-0113:
+    codeType: CONFIRM
+    shortDesc: Fetched Selected Report
+    longDesc: Fetched Report Successfully
+  ENG-0114:
+    codeType: ERROR
+    shortDesc: Missing Schedule Frequency
+    longDesc: Please select the schedule frequency
+  ENG-0115:
+    codeType: ERROR
+    shortDesc: Entry is invalid
+    longDesc: "% is invalid"
+  ENG-0116:
+    codeType: ERROR
+    shortDesc: Cannot Modify IO End Date
+    longDesc: IO End Date cannot be modified as campaigns ending on later date
+  ENG-0117:
+    codeType: ERROR
+    shortDesc: Campaign Dates not in range
+    longDesc: Campaign Dates not in range as IO Dates
+  ENG-0118:
+    codeType: ERROR
+    shortDesc: Cannot Modify Campaign End Date
+    longDesc: Campaign End Date cannot be modified as Line Items ending on later date
+  ENG-0119:
+    codeType: ERROR
+    shortDesc: Please enter the front load percentage
+    longDesc: Percentage is mandatory when front load chosen
+  ENG-0120:
+    codeType: ERROR
+    shortDesc: 'Percentage cannot be more that 100. '
+    longDesc: 'Percentage cannot be more that 100. '
+  ENG-0121:
+    codeType: ERROR
+    shortDesc: Budget Allocation cannot be changed
+    longDesc: Budget Allocation cannot change as LineItems associated with Campaign
+  ENG-0122:
+    codeType: ERROR
+    shortDesc: Record already Exists
+    longDesc: Record already Exists for the  Account

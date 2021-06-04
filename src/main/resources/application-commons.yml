@@ -1,0 +1,14 @@
+server:
+  port: 8080
+  tomcat:
+    accesslog:
+      enabled: true
+      directory: "/tmp/service-template"
+      prefix: stdout
+      buffered: false
+      suffix:
+      file-date-format:
+      pattern: "[ACCESS] %{org.apache.catalina.AccessLog.RemoteAddress %l %t %D %F"
+
+consul:
+  host: consul.adnear.net:80
