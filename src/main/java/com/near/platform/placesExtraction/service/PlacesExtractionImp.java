@@ -3,6 +3,7 @@ package com.near.platform.placesExtraction.service;
 import com.near.platform.placesExtraction.exception.*;
 import com.near.platform.placesExtraction.model.mongo.LocationMetrics;
 import com.near.platform.placesExtraction.repository.PlacesExtractionRepository;
+import mcm.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +18,35 @@ public class PlacesExtractionImp {
   private Logger logger = LoggerFactory.getLogger(PlacesExtractionImp.class);
 
   @Autowired
+  NearServiceResponseUtil nearServiceResponseUtil;
+
+  @Autowired
   PlacesExtractionRepository placesExtractionRepository;
 
-  public ResponseEntity<HttpStatus> addDataToDatabase(LocationMetrics locationMetrics) throws Exception {
+  public ResponseEntity<NearServiceResponseDto> addDataToDatabase(LocationMetrics locationMetrics) throws Exception {
+    MessageCodeInfo messageCodeInfo;
+    NearServiceResponseDto nearServiceResponseDto;
     //To check data is valid
     dataValidator(locationMetrics);
     try {
       placesExtractionRepository.save(locationMetrics);
-      return new ResponseEntity<>(HttpStatus.OK);
+
+      messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLATFORM, "PLT-0008", null);
+      nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.OK.value(), "PLT-0008", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Data saved to database successfully");
+      return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.OK);
     }
     catch (Exception ex){
-      logger.error("Exception while saving data to database",ex);
+      logger.error(" Exception while saving data to database",ex);
     }
-    return new ResponseEntity<>(HttpStatus.PRECONDITION_FAILED);
+    messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLATFORM, "PLT-0001", null);
+    nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "PLT-0001", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Data not saved to database");
+    return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.PRECONDITION_FAILED);
   }
 
-  public ResponseEntity<HttpStatus> updateMetricsDetail(String id, LocationMetrics locationMetricsDetails) throws Exception {
+  public ResponseEntity<NearServiceResponseDto> updateMetricsDetail(String id, LocationMetrics locationMetricsDetails) throws Exception {
+    MessageCodeInfo messageCodeInfo;
+    NearServiceResponseDto nearServiceResponseDto;
+
     dataValidator(locationMetricsDetails);
     if (placesExtractionRepository.findById(id).isPresent()) {
       try {
@@ -50,14 +64,17 @@ public class PlacesExtractionImp {
         locationMetrics.setSource(locationMetricsDetails.getSource());//set source
 
         placesExtractionRepository.save(locationMetrics);
-        return new ResponseEntity<>(HttpStatus.OK);
+
+        messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLATFORM, "PLT-0008", null);
+        nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.OK.value(), "PLT-0008", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Data updated to database successfully");
+        return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.OK);
+
       } catch (Exception ex) {
         logger.error("Exception while updating data :", ex);
       }
     }
       throw new IdNotFoundException("Entered id doesn't matched, please provide correct id");
   }
-
 
   public LocationMetrics getLocationMetricsData(String id) throws Exception {
     if(placesExtractionRepository.findById(id).isPresent()){
