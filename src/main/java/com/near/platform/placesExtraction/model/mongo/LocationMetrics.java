@@ -10,18 +10,19 @@ public class LocationMetrics {
 
     @Id
     private ObjectId id;
-    private long currentPOICount;
-    private long extractedPOICount;
-    private long ingestCount;
-    private long updateCount;
-    private long deleteCount;
+    private Long currentPOICount;
+    private Long extractedPOICount;
+    private Long ingestCount;
+    private Long updateCount;
+    private Long deleteCount;
     private Date dateOfExtraction;
-    private long poiListId;
+    private Long poiListId;
     private String country;
-    private long groundTruth;
+    private Long groundTruth;
     private String source;
 
-    public LocationMetrics(long currentPOICount, long extractedPOICount, long ingestCount, long updateCount, long deleteCount, Date dateOfExtraction, long poiListId, String country, long groundTruth, String source) {
+    public LocationMetrics(ObjectId id, Long currentPOICount, Long extractedPOICount, Long ingestCount, Long updateCount, Long deleteCount, Date dateOfExtraction, Long poiListId, String country, Long groundTruth, String source) {
+        this.id = id;
         this.currentPOICount = currentPOICount;
         this.extractedPOICount = extractedPOICount;
         this.ingestCount = ingestCount;
@@ -34,51 +35,51 @@ public class LocationMetrics {
         this.source = source;
     }
 
-    public ObjectId get_id() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void set_id(ObjectId id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
-    public long getCurrentPOICount() {
+    public Long getCurrentPOICount() {
         return currentPOICount;
     }
 
-    public void setCurrentPOICount(long currentPOICount) {
+    public void setCurrentPOICount(Long currentPOICount) {
         this.currentPOICount = currentPOICount;
     }
 
-    public long getExtractedPOICount() {
+    public Long getExtractedPOICount() {
         return extractedPOICount;
     }
 
-    public void setExtractedPOICount(long extractedPOICount) {
+    public void setExtractedPOICount(Long extractedPOICount) {
         this.extractedPOICount = extractedPOICount;
     }
 
-    public long getIngestCount() {
+    public Long getIngestCount() {
         return ingestCount;
     }
 
-    public void setIngestCount(long ingestCount) {
+    public void setIngestCount(Long ingestCount) {
         this.ingestCount = ingestCount;
     }
 
-    public long getUpdateCount() {
+    public Long getUpdateCount() {
         return updateCount;
     }
 
-    public void setUpdateCount(long updateCount) {
+    public void setUpdateCount(Long updateCount) {
         this.updateCount = updateCount;
     }
 
-    public long getDeleteCount() {
+    public Long getDeleteCount() {
         return deleteCount;
     }
 
-    public void setDeleteCount(long deleteCount) {
+    public void setDeleteCount(Long deleteCount) {
         this.deleteCount = deleteCount;
     }
 
@@ -90,11 +91,11 @@ public class LocationMetrics {
         this.dateOfExtraction = dateOfExtraction;
     }
 
-    public long getPoiListId() {
+    public Long getPoiListId() {
         return poiListId;
     }
 
-    public void setPoiListId(long poiListId) {
+    public void setPoiListId(Long poiListId) {
         this.poiListId = poiListId;
     }
 
@@ -106,11 +107,11 @@ public class LocationMetrics {
         this.country = country;
     }
 
-    public long getGroundTruth() {
+    public Long getGroundTruth() {
         return groundTruth;
     }
 
-    public void setGroundTruth(long groundTruth) {
+    public void setGroundTruth(Long groundTruth) {
         this.groundTruth = groundTruth;
     }
 
