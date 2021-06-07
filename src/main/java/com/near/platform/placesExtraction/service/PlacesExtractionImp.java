@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
+import java.util.List;
 
 @Service
 public class PlacesExtractionImp {
@@ -28,6 +28,15 @@ public class PlacesExtractionImp {
     NearServiceResponseDto nearServiceResponseDto;
     //To check data is valid
     dataValidator(locationMetrics);
+    //To check if data is not already present into database
+    List<LocationMetrics> metricsDataList = placesExtractionRepository.findByPoiListId(locationMetrics.getPoiListId());
+    for (LocationMetrics metricsData: metricsDataList) {
+      if(metricsData.getPoiListId().equals(locationMetrics.getPoiListId())){
+        messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLATFORM, "PLT-0001", null);
+        nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "PLT-0001", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Data is already present in database");
+        return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.PRECONDITION_FAILED);
+      }
+    }
     try {
       placesExtractionRepository.save(locationMetrics);
 
@@ -87,14 +96,17 @@ public class PlacesExtractionImp {
     if (locationMetrics.getCountry() == null) {
       throw new MetricsFieldNotFoundException("Country value is missing");
     }
-    if(locationMetrics.getExtractedPOICount() == null){
+    else if(locationMetrics.getExtractedPOICount() == null){
       throw new MetricsFieldNotFoundException("ExtractedPoiCount value is missing");
     }
-    if(locationMetrics.getDeleteCount() == null){
+    else if(locationMetrics.getDeleteCount() == null){
       throw new MetricsFieldNotFoundException("DeletedCount value is missing");
     }
-    if(locationMetrics.getCurrentPOICount() == null){
+    else if(locationMetrics.getCurrentPOICount() == null){
       throw new MetricsFieldNotFoundException("CurrentPoiCount value is missing");
+    }
+    else if (locationMetrics.getPoiListId() == null){
+      throw new MetricsFieldNotFoundException("Poi List Id is missing");
     }
   }
 }
