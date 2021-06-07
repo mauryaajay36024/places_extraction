@@ -435,6 +435,150 @@ platform:
     codeType: ERROR
     shortDesc: "."
     longDesc: "."
+  PLT-0109:
+    codeType: ERROR
+    shortDesc: Creation failed!
+    longDesc: POI Exist.
+  PLT-0110:
+    codeType: ERROR
+    shortDesc: Line Item being processed
+    longDesc: 'The line item data is being processed. Your edits are possible when
+      status in Draft '
+  PLT-0111:
+    codeType: CONFIRM
+    shortDesc: "."
+    longDesc: "."
+  PLT-0112:
+    codeType: INFO
+    shortDesc: "."
+    longDesc: "."
+  PLT-0113:
+    codeType: CONFIRM
+    shortDesc: Created Ubermedia Segment
+    longDesc: Created Ubermedia Segment Successfully
+  PLT-0114:
+    codeType: ERROR
+    shortDesc: Failed to create Ubermedia segment
+    longDesc: Ubermedia Segment creation failed due to below reason
+  PLT-0115:
+    codeType: CONFIRM
+    shortDesc: Refreshed Ubermedia Segment
+    longDesc: Refreshed Ubermedia Segment Successfully
+  PLT-0116:
+    codeType: ERROR
+    shortDesc: Ubermedia Segment Refresh Failed
+    longDesc: Ubermedia Segment Refresh was a failure due to below reasons
+  PLT-0117:
+    codeType: ERROR
+    shortDesc: Invalid provider
+    longDesc: Provider mentioned is not valid. Should be one of the below. Verizon,
+      PubMatic, Rubicon, AdSquare, S3 or UberMedia.
+  PLT-0118:
+    codeType: ERROR
+    shortDesc: Invalid Internal Segment Id
+    longDesc: Provided internal segment Id is not valid. Please provide a valid Id.
+  PLT-0119:
+    codeType: ERROR
+    shortDesc: Invalid External Segment Id
+    longDesc: Provided external segment Id is not valid. Please provide a valid Id.
+  PLT-0120:
+    codeType: ERROR
+    shortDesc: Invalid Partner User Id
+    longDesc: Provided partner User Id is not valid. Please provide a valid Id.
+  PLT-0121:
+    codeType: ERROR
+    shortDesc: Invalid name
+    longDesc: Provided name is not valid. Please provide a valid name.
+  PLT-0122:
+    codeType: CONFIRM
+    shortDesc: Created Segment
+    longDesc: Created Segment Successfully
+  PLT-0123:
+    codeType: CONFIRM
+    shortDesc: Last exported time updated !
+    longDesc: Last Exported Time updated for the segment specified.
+  PLT-0124:
+    codeType: ERROR
+    shortDesc: Invalid segment Id
+    longDesc: Provided Segment Id does not exist in the system. Please provide a valid
+      one.
+  PLT-0125:
+    codeType: CONFIRM
+    shortDesc: Active flag updated !
+    longDesc: Active status flag updated for the segment specified.
+  PLT-0126:
+    codeType: CONFIRM
+    shortDesc: Deleted flag updated !
+    longDesc: Deleted flag updated for the segment specified.
+  PLT-0127:
+    codeType: CONFIRM
+    shortDesc: Export status fetched !
+    longDesc: Fetched export status of the segment successfully.
+  PLT-0128:
+    codeType: CONFIRM
+    shortDesc: Segment refresh initiated !
+    longDesc: Refresh for the requested segment initiated successfully
+  PLT-0129:
+    codeType: CONFIRM
+    shortDesc: Auto refresh flag updated !
+    longDesc: Auto refresh flag has been updated successfully.
+  PLT-0130:
+    codeType: ERROR
+    shortDesc: Auto refresh flag updated failed
+    longDesc: Updation of Auto refresh flag  failed.
+  PLT-0131:
+    codeType: ERROR
+    shortDesc: Invalid Export ID !
+    longDesc: Provided Export ID not available.
+  PLT-0132:
+    codeType: CONFIRM
+    shortDesc: ID generated successfully
+    longDesc: Allspark ID generation was successful
+  PLT-0133:
+    codeType: ERROR
+    shortDesc: ID Gen - country blocked
+    longDesc: Country blocked from ID generation
+  PLT-0134:
+    codeType: ERROR
+    shortDesc: ID Gen - IFA blocked
+    longDesc: IFA opted out from ID generation
+  PLT-0135:
+    codeType: CONFIRM
+    shortDesc: ASPK ID already exists
+    longDesc: ID Gen - ASPK ID already exists for IFA
+  PLT-0136:
+    codeType: CONFIRM
+    shortDesc: ASPK ID for IFA found
+    longDesc: IFA lookup successful
+  PLT-0137:
+    codeType: CONFIRM
+    shortDesc: ASPKID for IFA set
+    longDesc: ASPK ID for IFA set in ID store
+  PLT-0138:
+    codeType: CONFIRM
+    shortDesc: ASPK ID deleted
+    longDesc: ASPK ID deleted from ID store
+  PLT-0139:
+    codeType: CONFIRM
+    shortDesc: ID Manager - success
+    longDesc: ID Manager - call successful
+  PLT-0140:
+    codeType: ERROR
+    shortDesc: ID Manager - error
+    longDesc: ID Manager call error
+  PLT-0141:
+    codeType: CONFIRM
+    shortDesc: ASPK ID for IFA not found
+    longDesc: IFA not found
+  PLT-0142:
+    codeType: ERROR
+    shortDesc: Error in ID gen
+    longDesc: Error in the ID generation process
+  PLT-0143:
+    codeType: ERROR
+    shortDesc: Segment already exists !
+    longDesc: Segment already exists for the given client. Duplicate segment creation
+      not allowed.
 allspark:
   ASP-0001:
     codeType: INFO
@@ -924,6 +1068,22 @@ carbon:
     codeType: INFO
     shortDesc: Advanced Plan Request is Successfully Sent.
     longDesc: Advanced Plan Request is Successfully Sent.
+  CBN-0024:
+    codeType: INFO
+    shortDesc: Fetch Successful
+    longDesc: Successfully get CARBON dashboard statistics.
+  CBN-0025:
+    codeType: INFO
+    shortDesc: Scheduler running
+    longDesc: Please check logs for running results.
+  CBN-0026:
+    codeType: WARN
+    shortDesc: Already in Running state.
+    longDesc: Service is in running state.
+  CBN-0027:
+    codeType: ERROR
+    shortDesc: get dashboard stats failed
+    longDesc: 'Couldn''t fetch data for provided inputs. '
 compass:
   CMP-0001:
     codeType: ERROR
@@ -1043,6 +1203,18 @@ compass:
     codeType: INFO
     shortDesc: trigger info
     longDesc: trigger info
+  CMP-0047:
+    codeType: ERROR
+    shortDesc: Campaign Update error
+    longDesc: Either campaign Id mismatch or uploaded file is empty
+  CMP-0048:
+    codeType: INFO
+    shortDesc: fetch successful
+    longDesc: fetch insights successful
+  CMP-0049:
+    codeType: INFO
+    shortDesc: Update successful
+    longDesc: Insights update successful
 mypage:
   NMP-0001:
     codeType: CONFIRM
@@ -1420,192 +1592,573 @@ places:
       or invalid.
   NPL-0014:
     codeType: ERROR
-    shortDesc: Category creation failed!
-    longDesc: Please enter a valid access key. Provided key is invalid or missing
+    shortDesc: Type mismatch
+    longDesc: Type error, please use only ingest, fetch, update or delete
   NPL-0015:
     codeType: ERROR
-    shortDesc: Category creation failed!!
-    longDesc: Category can't be created for the provided inputs
+    shortDesc: Couldn't generate radii-grid
+    longDesc: Polygon length and width has issue
   NPL-0016:
     codeType: ERROR
-    shortDesc: Category creation failed!!
+    shortDesc: Category creation failed
     longDesc: Category with provided inputs is already present
   NPL-0017:
     codeType: CONFIRM
-    shortDesc: Category created successfully!!
+    shortDesc: Category created
     longDesc: Category created successfully
   NPL-0018:
     codeType: ERROR
-    shortDesc: Query Failed!!
+    shortDesc: Query failed
     longDesc: Could not fetch data for the provided inputs
   NPL-0019:
     codeType: CONFIRM
-    shortDesc: Fetching Successful!!
-    longDesc: Successfully fetch the Category responses.
+    shortDesc: Fetch successful
+    longDesc: Successfully fetch the category responses
   NPL-0020:
     codeType: ERROR
-    shortDesc: Response failed!!
-    longDesc: Could not fetch output in CSV format.
+    shortDesc: Response failed
+    longDesc: Could not fetch output in CSV format
   NPL-0021:
     codeType: ERROR
-    shortDesc: Error!!
-    longDesc: Internal Error Occurred.
+    shortDesc: Error
+    longDesc: Internal error occurred
   NPL-0022:
     codeType: CONFIRM
-    shortDesc: Category tags updated!!
-    longDesc: successfully updated the tags for given category.
+    shortDesc: Category tags updated
+    longDesc: successfully updated the tags for given category
   NPL-0023:
     codeType: ERROR
-    shortDesc: Update failed!!
-    longDesc: Could not update tags for provided inputs. Please verify the given inputs.
+    shortDesc: Couldn't generate radii-grid
+    longDesc: Incomplete Polygon
   NPL-0024:
     codeType: CONFIRM
-    shortDesc: Fetching Successful!!
-    longDesc: 'Successfully fetch the  POI List responses. '
+    shortDesc: Fetch successful
+    longDesc: Successfully fetch the  POI List responses
   NPL-0025:
     codeType: ERROR
-    shortDesc: POI List tags updated!!
-    longDesc: Successfully updated the tags for given POI List.
+    shortDesc: POI List tags updated
+    longDesc: Successfully updated the tags for given POI List
   NPL-0026:
     codeType: CONFIRM
-    shortDesc: Fetching Successful!!
-    longDesc: Successfully fetch the Admin region data.
+    shortDesc: Fetch Successful
+    longDesc: Successfully fetch the admin region data
   NPL-0027:
     codeType: ERROR
-    shortDesc: Query Failed!!
-    longDesc: Could not fetch Admin Region data for provided Inputs.
+    shortDesc: Query Failed
+    longDesc: Could not fetch admin region data for provided Inputs
   NPL-0028:
     codeType: CONFIRM
-    shortDesc: IDs created Successfully!
-    longDesc: New Ids are successfully set to Admin Regions.
+    shortDesc: IDs created successfully
+    longDesc: New Ids are successfully set to admin regions.
   NPL-0029:
     codeType: ERROR
-    shortDesc: IDs creations failed!!
-    longDesc: Couldn't create new Ids for provided inputs.
+    shortDesc: IDs creations failed
+    longDesc: Couldn't create new Ids for provided inputs. Perhaps, no id is left
+      to set.
   NPL-0030:
     codeType: CONFIRM
-    shortDesc: Successfully Update!!
-    longDesc: Successfully update the Admin Region.
+    shortDesc: Save successful
+    longDesc: Successfully save the admin region
   NPL-0031:
     codeType: ERROR
-    shortDesc: Update Failed!!
-    longDesc: Couldn't update Admin Region for provided Inputs.
+    shortDesc: Update Failed
+    longDesc: Couldn't update Admin Region for provided Inputs
   NPL-0032:
     codeType: ERROR
-    shortDesc: Query Failed!!
-    longDesc: Couldn't fetch super categories for provided inputs.
+    shortDesc: Query Failed
+    longDesc: Couldn't fetch super categories for provided inputs
   NPL-0033:
     codeType: CONFIRM
-    shortDesc: Fetching Successful!!
-    longDesc: Successfully fetch the super categories.
+    shortDesc: Fetch successful
+    longDesc: Successfully fetch the super categories
   NPL-0034:
     codeType: ERROR
-    shortDesc: Building Creation failed!
-    longDesc: new Building can not be created for provided Inputs.
+    shortDesc: Couldn't generate radii-grid
+    longDesc: Radius not found
   NPL-0035:
     codeType: CONFIRM
-    shortDesc: Building creation successful!!
-    longDesc: New Building created successfully.
+    shortDesc: Building creation successful
+    longDesc: New building created successfully
   NPL-0036:
     codeType: ERROR
-    shortDesc: Query failed!
-    longDesc: Couldn't fetch Buildings for provided Inputs.
+    shortDesc: Query failed
+    longDesc: Couldn't fetch buildings for provided Inputs
   NPL-0037:
     codeType: CONFIRM
-    shortDesc: Fetching Successful!
-    longDesc: Successfully fetch the Building Data.
+    shortDesc: Fetch Successful
+    longDesc: Successfully fetch the building data.
   NPL-0038:
     codeType: ERROR
-    shortDesc: Section Creation Failed!!
-    longDesc: Section can not be created for provided inputs.
+    shortDesc: Section creation failed
+    longDesc: Section can not be created for provided inputs
   NPL-0039:
     codeType: CONFIRM
-    shortDesc: Section Creation Successful!
-    longDesc: New Section Created Successfully.
+    shortDesc: Section creation successful
+    longDesc: New section created successfully
   NPL-0040:
     codeType: ERROR
-    shortDesc: Fetching failed!
-    longDesc: Couldn't fetch a Section for provided Inputs.
+    shortDesc: Fetching failed
+    longDesc: Couldn't fetch a section for provided inputs
   NPL-0041:
     codeType: CONFIRM
-    shortDesc: Fetching Successful!
-    longDesc: Successfully fetch the Section Data.
+    shortDesc: Fetching Successful
+    longDesc: Successfully fetch the section data.
   NPL-0042:
     codeType: ERROR
-    shortDesc: Query Failed!
-    longDesc: Couldn't fetch the POI response for the provided inputs.
+    shortDesc: Query failed
+    longDesc: Couldn't fetch the POI response for the provided inputs
   NPL-0043:
     codeType: CONFIRM
-    shortDesc: Fetching Successful!!
-    longDesc: Successfully fetch the POI responses.
+    shortDesc: Fetching Successful
+    longDesc: Successfully fetch the POI responses
   NPL-0044:
     codeType: ERROR
-    shortDesc: Country not found!!
+    shortDesc: Country not found
     longDesc: Provided Near-Poi-Id is not valid, please provide a valid Id.
   NPL-0045:
     codeType: ERROR
-    shortDesc: Place creation failed!!
+    shortDesc: Place creation failed
     longDesc: Couldn't create new place for the provided Inputs.
   NPL-0046:
     codeType: CONFIRM
-    shortDesc: Creation Successful!!
+    shortDesc: Creation Successful
     longDesc: New place is created successfully.
   NPL-0047:
     codeType: ERROR
-    shortDesc: POI Update failed!!
+    shortDesc: POI Update failed
     longDesc: Couldn't update POI for provided Inputs.
   NPL-0048:
     codeType: CONFIRM
-    shortDesc: POI Update Successful!!
+    shortDesc: POI Update Successful
     longDesc: Successfully update the POIs.
   NPL-0049:
     codeType: ERROR
-    shortDesc: 'Failed to Delete!! '
+    shortDesc: Failed to Delete
     longDesc: Couldn't delete a POI for provided inputs.
   NPL-0050:
     codeType: CONFIRM
-    shortDesc: Deletion successful!!
+    shortDesc: Deletion successful
     longDesc: Deleted POIs Successfully.
   NPL-0051:
     codeType: ERROR
-    shortDesc: Query Failed!!
+    shortDesc: Query failed
     longDesc: Couldn't Fetch an Event for the provided inputs.
   NPL-0052:
     codeType: CONFIRM
-    shortDesc: Fetching Successful!!
+    shortDesc: Fetching successful
     longDesc: Successfully fetch the Event responses.
   NPL-0053:
     codeType: ERROR
-    shortDesc: Creation Failed!!
+    shortDesc: Creation failed
     longDesc: Couldn't create a new Event  for provided Inputs.
   NPL-0054:
     codeType: CONFIRM
-    shortDesc: Creation Successful!!
+    shortDesc: Creation successful
     longDesc: New Event is created successfully.
   NPL-0055:
     codeType: ERROR
-    shortDesc: Update Failed!
-    longDesc: Couldn't Update the Event for Provided Inputs
+    shortDesc: Update failed
+    longDesc: Couldn't update a Event for provided Inputs
   NPL-0056:
     codeType: CONFIRM
-    shortDesc: Update successful!!
+    shortDesc: Update successful
     longDesc: Successfully update an Event.
   NPL-0057:
     codeType: ERROR
-    shortDesc: Deletion Failed!!
-    longDesc: An Event Couldn't be Deleted for provided Inputs.
+    shortDesc: Deletion failed
+    longDesc: An Event couldn't be deleted for provided Inputs.
   NPL-0058:
     codeType: CONFIRM
-    shortDesc: Deletion Successful!!
-    longDesc: Deleted Events Successfully.
+    shortDesc: Deletion successful
+    longDesc: Deleted Events successfully.
   NPL-0059:
     codeType: ERROR
-    shortDesc: Query Failed!!
+    shortDesc: Query failed
     longDesc: Couldn't not fetch Analytics data for provided inputs.
   NPL-0060:
     codeType: CONFIRM
+    shortDesc: Fetch successful
+    longDesc: Successfully fetch the Analytics data.
+  NPL-0061:
+    codeType: ERROR
+    shortDesc: Query failed
+    longDesc: Couldn't fetch radii-grid data for provided inputs.
+  NPL-0062:
+    codeType: CONFIRM
+    shortDesc: Fetch successful
+    longDesc: Successfully fetch the Radii-Grid data.
+  NPL-0063:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Couldn't ingest a Radii-Grid data for provided inputs.
+  NPL-0064:
+    codeType: CONFIRM
+    shortDesc: Ingestion successful
+    longDesc: Successfully ingested Radii-Grid data.
+  NPL-0065:
+    codeType: ERROR
+    shortDesc: Query failed
+    longDesc: Couldn't generate Radii-Grid for provided inputs.
+  NPL-0066:
+    codeType: CONFIRM
+    shortDesc: Radii-Grid generated
+    longDesc: Successfully generated Radii-Grid with the response.
+  NPL-0067:
+    codeType: ERROR
+    shortDesc: Update failed
+    longDesc: Exception occurred during update.
+  NPL-0068:
+    codeType: CONFIRM
+    shortDesc: Update successful
+    longDesc: New changes updated successfully.
+  NPL-0069:
+    codeType: ERROR
+    shortDesc: Update failed
+    longDesc: Present category not found.
+  NPL-0070:
+    codeType: ERROR
+    shortDesc: Update failed
+    longDesc: Secondary category  not found. Please also check the mapping of p_cat
+      to s_cat.
+  NPL-0071:
+    codeType: ERROR
+    shortDesc: Update failed
+    longDesc: New primary category not found.
+  NPL-0072:
+    codeType: ERROR
+    shortDesc: Update failed
+    longDesc: New secondary category not found. Please also check the mapping of p_cat
+      to s_cat.
+  NPL-0073:
+    codeType: ERROR
+    shortDesc: Update failed
+    longDesc: POI-list not found.
+  NPL-0074:
+    codeType: ERROR
+    shortDesc: Query failed
+    longDesc: Couldn't fetch POIs for carbon for provided inputs.
+  NPL-0075:
+    codeType: CONFIRM
+    shortDesc: Fetching successful
+    longDesc: Successfully fetch POIs for Carbon.
+  NPL-0076:
+    codeType: ERROR
+    shortDesc: Ingestion failed
+    longDesc: Exception occurred.
+  NPL-0077:
+    codeType: ERROR
+    shortDesc: Ingestion failed
+    longDesc: Country not enabled for carbon.
+  NPL-0078:
+    codeType: CONFIRM
+    shortDesc: Ingestion successful
+    longDesc: New Carbon brands ingested for pois
+  NPL-0079:
+    codeType: ERROR
+    shortDesc: Ingestion failed
+    longDesc: POI not found.
+  NPL-0080:
+    codeType: ERROR
+    shortDesc: Encoding failed
+    longDesc: Couldn't fetch Geo Hash for provided inputs.
+  NPL-0081:
+    codeType: CONFIRM
+    shortDesc: Encoding successful
+    longDesc: Geo-hash encoded successfully
+  NPL-0082:
+    codeType: ERROR
+    shortDesc: Decoding failed
+    longDesc: Couldn't decode provided Geo-hash.
+  NPL-0083:
+    codeType: CONFIRM
+    shortDesc: Decoding successful
+    longDesc: Geo-hash decoded successfully.
+  NPL-0084:
+    codeType: ERROR
+    shortDesc: Fetching failed
+    longDesc: Couldn't fetch neighbours for provided Geo-hash
+  NPL-0085:
+    codeType: CONFIRM
+    shortDesc: Fetching successful
+    longDesc: 'Successfully fetched the geo-hash neighbours. '
+  NPL-0086:
+    codeType: ERROR
+    shortDesc: Fetching failed
+    longDesc: Couldn't find distances for provided inputs.
+  NPL-0087:
+    codeType: CONFIRM
+    shortDesc: Fetching successful
+    longDesc: Successfully fetch the responses.
+  NPL-0088:
+    codeType: ERROR
+    shortDesc: Fetching failed
+    longDesc: Couldn't fetch timezone for provided inputs.
+  NPL-0089:
+    codeType: CONFIRM
+    shortDesc: Fetching successful
+    longDesc: Successfully fetched the Timezone.
+  NPL-0090:
+    codeType: ERROR
+    shortDesc: Encoding failed
+    longDesc: Couldn't encode H3 for provided Inputs.
+  NPL-0091:
+    codeType: CONFIRM
+    shortDesc: Encoding Successful!!
+    longDesc: H3 encoded successfully!!
+  NPL-0092:
+    codeType: ERROR
+    shortDesc: Decoding Failed!!
+    longDesc: Couldn't decode provided H3.
+  NPL-0093:
+    codeType: CONFIRM
+    shortDesc: Decoding successful!!
+    longDesc: H3 decoded successfully.
+  NPL-0094:
+    codeType: CONFIRM
     shortDesc: Fetching Successful!!
-    longDesc: Successfully fetch the Analytics Data.
+    longDesc: Successfully fetched Places in proximity.
+  NPL-0095:
+    codeType: ERROR
+    shortDesc: Fetching failed!!
+    longDesc: Couldn't fetch for provided inputs.
+  NPL-0096:
+    codeType: ERROR
+    shortDesc: Error Occurred!!
+    longDesc: An Exception Occurred while performing the operation.
+  NPL-0097:
+    codeType: ERROR
+    shortDesc: Creation failed!!
+    longDesc: Either data or source information is missing.
+  NPL-0098:
+    codeType: ERROR
+    shortDesc: Creation failed!!
+    longDesc: Country not provided.
+  NPL-0099:
+    codeType: ERROR
+    shortDesc: Creation Failed!
+    longDesc: Primary Category not provided.
+  NPL-0100:
+    codeType: ERROR
+    shortDesc: Creation failed!!
+    longDesc: Secondary category not provided.
+  NPL-0101:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: POI List/ Brand not provided.
+  NPL-0102:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Insert Batch Id is not provided.
+  NPL-0103:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Either latitude not provided or provided value is out of bounds(-90
+      deg to 90 deg).
+  NPL-0104:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Either longitude not provided or provided value is out of bounds(-180
+      deg to 180 deg).
+  NPL-0105:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Primary category not available in places.
+  NPL-0106:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Failed to save new secondary category or POI list.
+  NPL-0107:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: POI exist.
+  NPL-0108:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Required admin region not found for given coordinates.
+  NPL-0109:
+    codeType: ERROR
+    shortDesc: Update failed
+    longDesc: POI with ID, does not exist.
+  NPL-0110:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Event category not provided.
+  NPL-0111:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Couldn't find provided event category.
+  NPL-0112:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Event sub_category not provided.
+  NPL-0113:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Could not found and create sub_category.
+  NPL-0114:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Either event id or name not provided.
+  NPL-0115:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Please provide start and end time  for an Event.
+  NPL-0116:
+    codeType: ERROR
+    shortDesc: Update failed
+    longDesc: Either category or sub_category not found.
+  NPL-0117:
+    codeType: CONFIRM
+    shortDesc: Creation successful
+    longDesc: New Task is created.
+  NPL-0118:
+    codeType: CONFIRM
+    shortDesc: Fetching successful
+    longDesc: Successfully fetch the Tasks.
+  NPL-0119:
+    codeType: ERROR
+    shortDesc: Fetching unsuccessful
+    longDesc: Couldn't fetch the task for provided inputs.
+  NPL-0120:
+    codeType: ERROR
+    shortDesc: Update failed
+    longDesc: Please provide the ticket number.
+  NPL-0121:
+    codeType: CONFIRM
+    shortDesc: Update successful
+    longDesc: Successfully update Task.
+  NPL-0122:
+    codeType: ERROR
+    shortDesc: Deletion failed
+    longDesc: Task with the provided ticket number doesn't exist.
+  NPL-0123:
+    codeType: CONFIRM
+    shortDesc: Deletion successful
+    longDesc: Task deleted successfully.
+  NPL-0124:
+    codeType: CONFIRM
+    shortDesc: Creation failed
+    longDesc: Task with the provided ticket number already exist.
+  NPL-0125:
+    codeType: ERROR
+    shortDesc: Uploading failed
+    longDesc: Uploaded file is empty or invalid.
+  NPL-0126:
+    codeType: CONFIRM
+    shortDesc: File uploaded successfully
+    longDesc: you will receive a mail with download link for the file once the Geo
+      coding process is completed.
+  NPL-0127:
+    codeType: ERROR
+    shortDesc: Decoding failed
+    longDesc: Address not found, please try again with proper address.
+  NPL-0128:
+    codeType: ERROR
+    shortDesc: Encoding failed
+    longDesc: Given coordinates are incorrect, please try again with proper coordinates.
+  NPL-0129:
+    codeType: CONFIRM
+    shortDesc: File uploaded successfully
+    longDesc: you will receive a mail with download link for the file once the Reverse
+      Geo coding process is completed.
+  NPL-0130:
+    codeType: ERROR
+    shortDesc: Invalid inputs
+    longDesc: Please provide valid inputs.
+  NPL-0131:
+    codeType: CONFIRM
+    shortDesc: File uploaded successfully
+    longDesc: you will receive a mail with download link for the file once the geohash
+      encoding process is finished.
+  NPL-0132:
+    codeType: CONFIRM
+    shortDesc: Fetching successful
+    longDesc: Successfully fetch the data.
+  NPL-0133:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: 'Please provide the regional category name. '
+  NPL-0134:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Provided regional category already present.
+  NPL-0135:
+    codeType: CONFIRM
+    shortDesc: Creation successful
+    longDesc: Regional category created successfully.
+  NPL-0136:
+    codeType: CONFIRM
+    shortDesc: Fetching successful
+    longDesc: Successfully fetch  Regional categories.
+  NPL-0137:
+    codeType: ERROR
+    shortDesc: Update failed
+    longDesc: No brand found with the provided id.
+  NPL-0138:
+    codeType: ERROR
+    shortDesc: Update failed
+    longDesc: No regional category found for the provided name.
+  NPL-0139:
+    codeType: CONFIRM
+    shortDesc: Update successful
+    longDesc: Poi list updated successfully.
+  NPL-0140:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: provided regional category does exist for provided poi-list.
+  NPL-0141:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Provided regional Category does not exist.
+  NPL-0142:
+    codeType: ERROR
+    shortDesc: Update failed
+    longDesc: Same regional category already set for provided brand.
+  NPL-0143:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Building id is missing.
+  NPL-0144:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Provided Building id is already exist for  the country.
+  NPL-0145:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Section id is missing.
+  NPL-0146:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Provided Section id is already exist for the country.
+  NPL-0147:
+    codeType: ERROR
+    shortDesc: Update failed
+    longDesc: No category found for provided id.
+  NPL-0148:
+    codeType: ERROR
+    shortDesc: Update failed
+    longDesc: No POI-list found for provided id.
+  NPL-0149:
+    codeType: ERROR
+    shortDesc: Creation failed
+    longDesc: Provided id is already exist for the country.
+  NPL-0150:
+    codeType: CONFIRM
+    shortDesc: Search success
+    longDesc: Search result fetched successfully
+  NPL-0151:
+    codeType: ERROR
+    shortDesc: Search failure
+    longDesc: Search was a failure. Please get in touch with the Places Team with
+      this error message.
+  NPL-0152:
+    codeType: CONFIRM
+    shortDesc: Suggest success
+    longDesc: Suggesting a term from library was successful
+  NPL-0153:
+    codeType: ERROR
+    shortDesc: Suggest failed
+    longDesc: Suggesting a term from library was a failure
 engage:
   ENG-0001:
     codeType: ERROR
@@ -2007,20 +2560,20 @@ engage:
     longDesc: Invalid Impression Tracker
   ENG-0097:
     codeType: ERROR
-    shortDesc: Invalid Vast Tag
-    longDesc: Invalid Vast Tag
+    shortDesc: Invalid VAST tag
+    longDesc: Invalid VAST tag
   ENG-0098:
     codeType: ERROR
     shortDesc: LineItem could not be saved.
     longDesc: Please check the schedule settings again
   ENG-0099:
     codeType: ERROR
-    shortDesc: Please select right set of Creatives
-    longDesc: Please select right set of Creatives
+    shortDesc: Please assign creatives of the same creative format.
+    longDesc: Please assign creatives of the same creative format.
   ENG-0100:
     codeType: ERROR
-    shortDesc: Invalid RichMedia Tag
-    longDesc: Invalid RichMedia Tag
+    shortDesc: Invalid rich media tag
+    longDesc: Invalid rich media tag
   ENG-0101:
     codeType: ERROR
     shortDesc: Advertiser Not Approved
@@ -2066,7 +2619,7 @@ engage:
     shortDesc: Report Selection Updated
     longDesc: Report Selection Updated
   ENG-0112:
-    codeType: CONFIRM
+    codeType: INFO
     shortDesc: Fetched Saved Reports
     longDesc: Fetched Saved Reports
   ENG-0113:
@@ -2109,3 +2662,194 @@ engage:
     codeType: ERROR
     shortDesc: Record already Exists
     longDesc: Record already Exists for the  Account
+  ENG-0123:
+    codeType: ERROR
+    shortDesc: Line Item Dates not in range
+    longDesc: Line Item Dates not in range as Campaign Dates
+  ENG-0124:
+    codeType: ERROR
+    shortDesc: Not enough budget in IO
+    longDesc: Not enough budget remaining in %s to create a new campaign with budget
+      %s
+  ENG-0125:
+    codeType: ERROR
+    shortDesc: Not enough budget in Campaign
+    longDesc: Not enough budget remaining in %s to create a new line item with budget
+      %s
+  ENG-0126:
+    codeType: ERROR
+    shortDesc: Line item can not be activated
+    longDesc: 'The line item can not be activated as it doesn''t have creatives attached. '
+  ENG-0127:
+    codeType: ERROR
+    shortDesc: Creative not supported
+    longDesc: Creative not supported for the KPI selection
+  ENG-0128:
+    codeType: ERROR
+    shortDesc: Line Item being processed
+    longDesc: The line item data is being processed. Your edits are possible when
+      status in Draft
+  ENG-0129:
+    codeType: ERROR
+    shortDesc: Footfall Attribution could not be set up
+    longDesc: Footfall Attribution could not be set up
+  ENG-0130:
+    codeType: INFO
+    shortDesc: App is healthy
+    longDesc: App %s is healthy
+  ENG-0131:
+    codeType: ERROR
+    shortDesc: Invalid IPs
+    longDesc: 'Please add a valid IPv4 address '
+  ENG-0132:
+    codeType: ERROR
+    shortDesc: Start date cannot be less than campaign's start date
+    longDesc: Start date cannot be less than campaign's start date
+  ENG-0133:
+    codeType: ERROR
+    shortDesc: Restricted User
+    longDesc: User doesn't have access
+  ENG-0134:
+    codeType: WARN
+    shortDesc: Line item will go live once at least one creative is approved.
+    longDesc: Line item will go live once at least one creative is approved.
+  ENG-0135:
+    codeType: ERROR
+    shortDesc: Mandatory MOAT fields not present
+    longDesc: At least one of the mandatory dimensions (Advertiser ID, Line Item ID
+      and Creative ID) is required to generate the MOAT report
+  ENG-0136:
+    codeType: ERROR
+    shortDesc: Fields not supported for MOAT reporting
+    longDesc: Some of the selected dimensions are not supported to generate the MOAT
+      report. Hover on the (i) icon next to the Dimensions to check the list of supported
+      ones
+  ENG-0137:
+    codeType: WARN
+    shortDesc: Creative size warning
+    longDesc: Creative with >50KB file size may be blocked by some of the exchanges
+      as per their policy and may impact the campaign performance/delivery
+  ENG-0138:
+    codeType: ERROR
+    shortDesc: Invalid Banner Format
+    longDesc: Invalid file format. Please upload the creative again. Formats allowed
+      are JPEG/PNG/GIF
+  ENG-0139:
+    codeType: ERROR
+    shortDesc: 'Banner Creative Size '
+    longDesc: Invalid file size. Max allowance is 150KB for GIF and 75KB for JPEG/PNG.
+  ENG-0140:
+    codeType: ERROR
+    shortDesc: Invalid file dimension.
+    longDesc: Invalid file dimension. Please upload the creative again
+  ENG-0141:
+    codeType: ERROR
+    shortDesc: maximum of 255 characters
+    longDesc: "%s can be a maximum of 255 characters"
+  ENG-0142:
+    codeType: ERROR
+    shortDesc: Have crossed the upload limit
+    longDesc: The file has crossed the limit of 10,000 zip codes
+  ENG-0143:
+    codeType: ERROR
+    shortDesc: File already exists
+    longDesc: The Uploaded file already exists.
+  ENG-0144:
+    codeType: ERROR
+    shortDesc: No Deals selected
+    longDesc: 'PMP chosen with no deals selected '
+  ENG-0145:
+    codeType: ERROR
+    shortDesc: Flight details mandatory
+    longDesc: Flight details mandatory
+  ENG-0146:
+    codeType: ERROR
+    shortDesc: Auto Allocation not set
+    longDesc: 'With more than one flight the auto allocation should be set '
+  ENG-0147:
+    codeType: ERROR
+    shortDesc: Cannot Delete Flight
+    longDesc: 'End date crossed, hence cannot %s flight '
+  ENG-0148:
+    codeType: ERROR
+    shortDesc: 'The Flight date ranges cannot overlap '
+    longDesc: The Flight date range cannot be overlapping
+  ENG-0149:
+    codeType: ERROR
+    shortDesc: Can't add new flight
+    longDesc: Can't add new flight Campaign is already active
+  ENG-0150:
+    codeType: ERROR
+    shortDesc: Cannot change budget
+    longDesc: Daily budget cannot be less than current spend of %s
+  ENG-0151:
+    codeType: ERROR
+    shortDesc: Missing Pacing details
+    longDesc: Pacing details missing, please re enter and save again
+  ENG-0152:
+    codeType: ERROR
+    shortDesc: Active flight missing
+    longDesc: 'Missing mandatory active flight '
+  ENG-0153:
+    codeType: ERROR
+    shortDesc: Cannot delete Flight
+    longDesc: Cannot delete the flight since one or more line items have overlapping
+      duration
+  ENG-0154:
+    codeType: ERROR
+    shortDesc: Flight cannot be modified
+    longDesc: Flight end date has crossed and hence cannot be modified or deleted.
+  ENG-0155:
+    codeType: ERROR
+    shortDesc: Start Date for flight cannot be changed
+    longDesc: Start date cannot be modified for any flight with start date less than
+      current date
+prints:
+  PRN-0001:
+    codeType: INFO
+    shortDesc: Fetch successful
+    longDesc: Successfully fetch the POIs
+  PRN-0002:
+    codeType: ERROR
+    shortDesc: Error occurred
+    longDesc: Internal Server Error occurred
+  PRN-0003:
+    codeType: INFO
+    shortDesc: Fetch successful
+    longDesc: Successfully fetch the admin data
+  PRN-0004:
+    codeType: INFO
+    shortDesc: Successful response
+    longDesc: Successfully fetch the searched results
+  PRN-0005:
+    codeType: INFO
+    shortDesc: Successful response
+    longDesc: Successfully fetch the suggested results
+  PRN-0006:
+    codeType: ERROR
+    shortDesc: Fetch unsuccessful
+    longDesc: Couldn't fetch the footfall-stats for provided input
+  PRN-0007:
+    codeType: INFO
+    shortDesc: Fetch successful
+    longDesc: Successfully fetch footfall statistics
+  PRN-0008:
+    codeType: INFO
+    shortDesc: Fetch successful
+    longDesc: Successfully fetch footfalls meta-data
+  PRN-0009:
+    codeType: INFO
+    shortDesc: Fetch successful
+    longDesc: Successfully fetch nearby Places
+  PRN-0010:
+    codeType: ERROR
+    shortDesc: Failed to fetch
+    longDesc: Error in finding Geolocation for provided input
+  PRN-0011:
+    codeType: ERROR
+    shortDesc: Error Occurred
+    longDesc: Internal API response error occurred
+  PRN-0012:
+    codeType: INFO
+    shortDesc: Empty response
+    longDesc: Retrieve empty response for provided inputs
