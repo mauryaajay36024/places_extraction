@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
   tomcat:
     accesslog:
       enabled: true
@@ -11,4 +11,4 @@ server:
       pattern: "[ACCESS] %{org.apache.catalina.AccessLog.RemoteAddress %l %t %D %F"
 
 consul:
-  host: consul.adnear.net:80
+  host: int-consul.adnear.net:80
