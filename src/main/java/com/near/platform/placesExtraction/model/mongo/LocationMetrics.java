@@ -1,46 +1,42 @@
 package com.near.platform.placesExtraction.model.mongo;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 
-@Document(collection = "location_metrics")
+@Document(collection = "places")
 public class LocationMetrics {
-
     @Id
-    private ObjectId id;
+    private Long poiListId;
     private Long currentPOICount;
     private Long extractedPOICount;
     private Long ingestCount;
     private Long updateCount;
     private Long deleteCount;
     private Date dateOfExtraction;
-    private Long poiListId;
     private String country;
     private Long groundTruth;
     private String source;
 
-    public LocationMetrics(ObjectId id, Long currentPOICount, Long extractedPOICount, Long ingestCount, Long updateCount, Long deleteCount, Date dateOfExtraction, Long poiListId, String country, Long groundTruth, String source) {
-        this.id = id;
+    public LocationMetrics(Long poiListId, Long currentPOICount, Long extractedPOICount, Long ingestCount, Long updateCount, Long deleteCount, Date dateOfExtraction, String country, Long groundTruth, String source) {
+        this.poiListId = poiListId;
         this.currentPOICount = currentPOICount;
         this.extractedPOICount = extractedPOICount;
         this.ingestCount = ingestCount;
         this.updateCount = updateCount;
         this.deleteCount = deleteCount;
         this.dateOfExtraction = dateOfExtraction;
-        this.poiListId = poiListId;
         this.country = country;
         this.groundTruth = groundTruth;
         this.source = source;
     }
 
-    public ObjectId getId() {
-        return id;
+    public Long getPoiListId() {
+        return poiListId;
     }
 
-    public void setId(ObjectId id) {
-        this.id = id;
+    public void setPoiListId(Long poiListId) {
+        this.poiListId = poiListId;
     }
 
     public Long getCurrentPOICount() {
@@ -89,14 +85,6 @@ public class LocationMetrics {
 
     public void setDateOfExtraction(Date dateOfExtraction) {
         this.dateOfExtraction = dateOfExtraction;
-    }
-
-    public Long getPoiListId() {
-        return poiListId;
-    }
-
-    public void setPoiListId(Long poiListId) {
-        this.poiListId = poiListId;
     }
 
     public String getCountry() {
