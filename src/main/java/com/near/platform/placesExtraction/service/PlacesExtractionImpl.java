@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PlacesExtractionImp {
+public class PlacesExtractionImpl implements PlacesExtractionService{
 
-  private Logger logger = LoggerFactory.getLogger(PlacesExtractionImp.class);
+  private final Logger logger = LoggerFactory.getLogger(PlacesExtractionImpl.class);
 
   @Autowired
   NearServiceResponseUtil nearServiceResponseUtil;
@@ -23,41 +23,37 @@ public class PlacesExtractionImp {
   @Autowired
   PlacesExtractionRepository placesExtractionRepository;
 
-  public ResponseEntity<NearServiceResponseDto> addDataToDatabase(LocationMetrics locationMetrics) throws Exception {
+  @Override
+  public ResponseEntity<NearServiceResponseDto> addMetricsDataToDatabase(LocationMetrics locationMetrics) throws Exception {
     MessageCodeInfo messageCodeInfo;
     NearServiceResponseDto nearServiceResponseDto;
     //To check data is valid
     dataValidator(locationMetrics);
     //To check if data is not already present into database
-    List<LocationMetrics> metricsDataList = placesExtractionRepository.findByPoiListId(locationMetrics.getPoiListId());
-    for (LocationMetrics metricsData: metricsDataList) {
-      if(metricsData.getPoiListId().equals(locationMetrics.getPoiListId())){
-        messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLATFORM, "PLT-0001", null);
-        nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "PLT-0001", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Data is already present in database");
-        return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.PRECONDITION_FAILED);
+    if(placesExtractionRepository.findById(locationMetrics.getPoiListId()).isEmpty()) {
+      try {
+        placesExtractionRepository.save(locationMetrics);
+
+        messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLATFORM, "PLT-0008", null);
+        nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.OK.value(), "PLT-0008", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Data saved to database successfully");
+        return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.OK);
+      } catch (Exception ex) {
+        logger.error(" Exception while saving data to database", ex);
       }
     }
-    try {
-      placesExtractionRepository.save(locationMetrics);
-
-      messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLATFORM, "PLT-0008", null);
-      nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.OK.value(), "PLT-0008", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Data saved to database successfully");
-      return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.OK);
-    }
-    catch (Exception ex){
-      logger.error(" Exception while saving data to database",ex);
-    }
     messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLATFORM, "PLT-0001", null);
-    nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "PLT-0001", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Data not saved to database");
+    nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "PLT-0001", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Duplicate data entry");
     return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.PRECONDITION_FAILED);
   }
 
-  public ResponseEntity<NearServiceResponseDto> updateMetricsDetail(String id, LocationMetrics locationMetricsDetails) throws Exception {
+  @Override
+  public ResponseEntity<NearServiceResponseDto> updateMetricsDetail(Long id, LocationMetrics locationMetricsDetails) throws Exception {
     MessageCodeInfo messageCodeInfo;
     NearServiceResponseDto nearServiceResponseDto;
 
     dataValidator(locationMetricsDetails);
-    if (placesExtractionRepository.findById(id).isPresent()) {
+
+    if (placesExtractionRepository.findById(id).isPresent() && placesExtractionRepository.findById(id).get().getPoiListId().equals(locationMetricsDetails.getPoiListId())) {
       try {
         LocationMetrics locationMetrics = placesExtractionRepository.findById(id).get();
 
@@ -83,15 +79,24 @@ public class PlacesExtractionImp {
       }
     }
     messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
-    nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "NPL-0007", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Incorrect id, please enter correct id");
+    nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "NPL-0007", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Id not matched, please enter correct id");
     return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.PRECONDITION_FAILED);
   }
 
-  public LocationMetrics getLocationMetricsData(String id) throws Exception {
+  @Override
+  public LocationMetrics getLocationMetricsData(Long id) throws Exception {
     if(placesExtractionRepository.findById(id).isPresent()){
       return placesExtractionRepository.findById(id).get();
     }
     throw new IdNotFoundException("Entered id doesn't  matched, please provide correct id");
+  }
+
+  @Override
+  public List<LocationMetrics> getAllLocationMetricsData() throws Exception{
+    if(!placesExtractionRepository.findAll().isEmpty()){
+      return placesExtractionRepository.findAll();
+    }
+    throw new MetricsDataNotFoundException("No metrics data found into database");
   }
 
   private void dataValidator(LocationMetrics locationMetrics)  throws Exception{
@@ -109,6 +114,21 @@ public class PlacesExtractionImp {
     }
     else if (locationMetrics.getPoiListId() == null){
       throw new MetricsFieldNotFoundException("Poi List Id is missing");
+    }
+    else if (locationMetrics.getIngestCount() == null){
+      throw new MetricsFieldNotFoundException("Ingested count is missing");
+    }
+    else if (locationMetrics.getUpdateCount() == null){
+      throw new MetricsFieldNotFoundException(" Update count is missing");
+    }
+    else if (locationMetrics.getDateOfExtraction() == null){
+      throw new MetricsFieldNotFoundException("Date Of Extraction is missing");
+    }
+    else if (locationMetrics.getGroundTruth() == null){
+      throw new MetricsFieldNotFoundException("Ground truth is missing");
+    }
+    else if (locationMetrics.getSource() == null){
+      throw new MetricsFieldNotFoundException("Source of data is missing");
     }
   }
 }
