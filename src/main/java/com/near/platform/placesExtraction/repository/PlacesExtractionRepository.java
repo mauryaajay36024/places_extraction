@@ -8,7 +8,6 @@ import java.util.List;
 
 
 @Repository
-public interface PlacesExtractionRepository extends MongoRepository<LocationMetrics, String> {
+public interface PlacesExtractionRepository extends MongoRepository<LocationMetrics, Long> {
 
-  List<LocationMetrics> findByPoiListId(Long poiListId);
 }
