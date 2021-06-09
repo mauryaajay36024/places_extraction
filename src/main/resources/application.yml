@@ -3,6 +3,7 @@ spring:
   profiles.include:
     - 'message_codes'
     - 'commons'
+    - 'mailer'
 
 livy:
   host: http://wdc04-prod-thor-compserv02.adnear.net:8998
