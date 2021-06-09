@@ -10,7 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages={"com.near.platform.placesExtraction", "mcm", "utility", "mongodb"})
+@ComponentScan(basePackages={"com.near.platform.placesExtraction", "mailer","mcm", "utility", "mongodb"})
 public class NearServiceCoreApplication {
 
 	private static Logger logger = LoggerFactory.getLogger(NearServiceCoreApplication.class);
