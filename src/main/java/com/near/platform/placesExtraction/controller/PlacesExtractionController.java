@@ -63,7 +63,7 @@ public class PlacesExtractionController {
     @RequestMapping(value = "/metrics/add/", method = RequestMethod.POST)
     public ResponseEntity<NearServiceResponseDto> uploadDataToDatabase(@RequestBody LocationMetrics locationMetrics, @RequestParam(value = "userId") String userId) throws Exception {
 
-        return placesExtractionService.addFileDataToDatabase(locationMetrics,userId);
+        return placesExtractionService.addPlacesDataToDatabase(locationMetrics,userId);
 
     }
 }
