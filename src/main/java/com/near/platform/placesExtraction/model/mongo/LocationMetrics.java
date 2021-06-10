@@ -8,6 +8,9 @@ import java.util.Date;
 public class LocationMetrics {
     @Id
     private Long poiListId;
+    private String poiListName;
+    private String cat1;
+    private String cat2;
     private Long currentPOICount;
     private Long extractedPOICount;
     private Long ingestCount;
@@ -18,8 +21,11 @@ public class LocationMetrics {
     private Long groundTruth;
     private String source;
 
-    public LocationMetrics(Long poiListId, Long currentPOICount, Long extractedPOICount, Long ingestCount, Long updateCount, Long deleteCount, Date dateOfExtraction, String country, Long groundTruth, String source) {
+    public LocationMetrics(Long poiListId, String poiListName, String cat1, String cat2, Long currentPOICount, Long extractedPOICount, Long ingestCount, Long updateCount, Long deleteCount, Date dateOfExtraction, String country, Long groundTruth, String source) {
         this.poiListId = poiListId;
+        this.poiListName = poiListName;
+        this.cat1 = cat1;
+        this.cat2 = cat2;
         this.currentPOICount = currentPOICount;
         this.extractedPOICount = extractedPOICount;
         this.ingestCount = ingestCount;
@@ -109,5 +115,47 @@ public class LocationMetrics {
 
     public void setSource(String source) {
         this.source = source;
+    }
+
+    public String getPoiListName() {
+        return poiListName;
+    }
+
+    public void setPoiListName(String poiListName) {
+        this.poiListName = poiListName;
+    }
+
+    public String getCat1() {
+        return cat1;
+    }
+
+    public void setCat1(String cat1) {
+        this.cat1 = cat1;
+    }
+
+    public String getCat2() {
+        return cat2;
+    }
+
+    public void setCat2(String cat2) {
+        this.cat2 = cat2;
+    }
+
+    @Override
+    public String toString() {
+        return "Location Metrics Data <br>" +
+            "<br> POI List Id           :" + poiListId +
+            "<br> POI List Name         :" + poiListName +
+            "<br> Cat1                  :" + cat1 +
+            "<br> Cat2                  :" + cat2 +
+            "<br> Current POI Count     :" + currentPOICount +
+            "<br> Extracted POI Count   :" + extractedPOICount +
+            "<br> Ingest Count          :" + ingestCount +
+            "<br> Update Count          :" + updateCount +
+            "<br> Delete Count          :" + deleteCount +
+            "<br> Date Of Extraction    :" + dateOfExtraction +
+            "<br> Country               :" + country +
+            "<br> Ground Truth          :" + groundTruth +
+            "<br> Source                :" + source ;
     }
 }
