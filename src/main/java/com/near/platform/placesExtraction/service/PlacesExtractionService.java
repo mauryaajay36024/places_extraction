@@ -12,4 +12,5 @@ public interface PlacesExtractionService {
   LocationMetrics getLocationMetricsData(Long id) throws Exception;
   List<LocationMetrics>  getAllLocationMetricsData() throws Exception;
 
+  ResponseEntity<NearServiceResponseDto> addPlacesDataToDatabase(LocationMetrics locationMetrics, String userId) throws Exception;
 }
