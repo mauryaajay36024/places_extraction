@@ -1,8 +1,12 @@
-package com.near.platform.placesExtraction.service;
+package com.near.platform.placesExtraction.service.impl;
 
+import com.near.platform.placesExtraction.constant.Constants;
 import com.near.platform.placesExtraction.exception.*;
 import com.near.platform.placesExtraction.model.mongo.LocationMetrics;
 import com.near.platform.placesExtraction.repository.PlacesExtractionRepository;
+import com.near.platform.placesExtraction.service.MailerService;
+import com.near.platform.placesExtraction.service.PlacesExtractionService;
+import mailer.NearMailerService;
 import mcm.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,9 +15,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Service
-public class PlacesExtractionImpl implements PlacesExtractionService{
+public class PlacesExtractionImpl implements PlacesExtractionService {
 
   private final Logger logger = LoggerFactory.getLogger(PlacesExtractionImpl.class);
 
@@ -22,6 +28,11 @@ public class PlacesExtractionImpl implements PlacesExtractionService{
 
   @Autowired
   PlacesExtractionRepository placesExtractionRepository;
+
+  @Autowired
+  NearMailerService nearMailerService;
+
+  private ExecutorService taskPool = Executors.newFixedThreadPool(100);
 
   @Override
   public ResponseEntity<NearServiceResponseDto> addMetricsDataToDatabase(LocationMetrics locationMetrics) throws Exception {
@@ -97,6 +108,35 @@ public class PlacesExtractionImpl implements PlacesExtractionService{
       return placesExtractionRepository.findAll();
     }
     throw new MetricsDataNotFoundException("No metrics data found into database");
+  }
+
+  //todo testing mailer service
+  @Override
+  public ResponseEntity<NearServiceResponseDto> addPlacesDataToDatabase(LocationMetrics locationMetrics, String userId) throws Exception{
+    MessageCodeInfo messageCodeInfo;
+    NearServiceResponseDto nearServiceResponseDto;
+
+    //To check data is valid
+    dataValidator(locationMetrics);
+    //To check if data is not already present into database
+    if(placesExtractionRepository.findById(locationMetrics.getPoiListId()).isEmpty()) {
+      try {
+        placesExtractionRepository.save(locationMetrics);
+
+        taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, userId, Constants.SUCCESS_SUBJECT, Constants.SUCCESS_BODY));
+
+        logger.info("Mailer initiated Successfully");
+
+        messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLATFORM, "PLT-0008", null);
+        nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.OK.value(), "PLT-0008", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Data saved to database successfully");
+        return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.OK);
+      } catch (Exception ex) {
+        logger.error(" Exception while saving data to database", ex);
+      }
+    }
+    messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLATFORM, "PLT-0001", null);
+    nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "PLT-0001", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Duplicate data entry");
+    return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.PRECONDITION_FAILED);
   }
 
   private void dataValidator(LocationMetrics locationMetrics)  throws Exception{
