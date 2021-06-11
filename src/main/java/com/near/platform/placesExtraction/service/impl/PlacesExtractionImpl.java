@@ -1,6 +1,8 @@
 package com.near.platform.placesExtraction.service.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.near.platform.placesExtraction.constant.Constants;
+import com.near.platform.placesExtraction.dto.request.FileProcessRequest;
 import com.near.platform.placesExtraction.exception.*;
 import com.near.platform.placesExtraction.model.mongo.LocationMetrics;
 import com.near.platform.placesExtraction.repository.PlacesExtractionRepository;
@@ -11,14 +13,19 @@ import mcm.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Service
+@ConfigurationProperties(prefix="livy")
 public class PlacesExtractionImpl implements PlacesExtractionService {
 
   private final Logger logger = LoggerFactory.getLogger(PlacesExtractionImpl.class);
@@ -31,6 +38,15 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
 
   @Autowired
   NearMailerService nearMailerService;
+
+  private String url;
+  private String driverMemory;
+  private String executorMemory;
+  private Integer numExecutors;
+  private String file;
+  private Integer executorCores;
+//  private String queue;
+//  private String pyFiles;
 
   private ExecutorService taskPool = Executors.newFixedThreadPool(100);
 
@@ -150,6 +166,50 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
     throw new MetricsDataNotFoundException("No metrics data found into database");
   }
 
+  //todo testing livy
+  @Override
+  public ResponseEntity<NearServiceResponseDto> livyStartSparkJob() throws Exception {
+
+    MessageCodeInfo messageCodeInfo;
+    NearServiceResponseDto nearServiceResponseDto;
+
+    Map<String, Object> conf = new HashMap<>();
+    conf.put("spark.yarn.maxAppAttempts", 3);
+    conf.put("spark.dynamicAllocation.minExecutors", 1);
+    conf.put("spark.dynamicAllocation.maxExecutors", 20);
+
+    //todo added extra
+//    conf.put("spark.deployMode","cluster");
+//    conf.put("spark.master" ,"yarnClient");
+
+    FileProcessRequest fileProcessRequest = new FileProcessRequest(conf, numExecutors, file, executorMemory, driverMemory, executorCores);
+    ObjectMapper mapper = new ObjectMapper();
+    String req = mapper.writeValueAsString(fileProcessRequest);
+    logger.info("request: {}", req);
+
+    RestTemplate restTemplate = new RestTemplate();
+    HttpHeaders headers = new HttpHeaders();
+    headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+    HttpEntity<FileProcessRequest> entity = new HttpEntity<>(fileProcessRequest, headers);
+
+    try {
+      String result = restTemplate.postForObject(url, entity, String.class);
+      logger.info("result {}",result);
+      logger.info("Spark job initiated");
+
+      messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
+      nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "NPL-0007", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job start");
+      return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.OK);
+
+    } catch (Exception e) {
+      logger.error("Exception ",e);
+    }
+    messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
+    nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "NPL-0007", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job failed");
+    return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.PRECONDITION_FAILED);
+
+  }
+
   private void dataValidator(LocationMetrics locationMetrics)  throws Exception{
     if (locationMetrics.getCountry() == null) {
       throw new MetricsFieldNotFoundException("Country value is missing");
@@ -191,4 +251,55 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
       throw new MetricsFieldNotFoundException("Category2 of metrics data is missing");
     }
   }
+
+
+  //todo testing
+  public String getUrl() {
+    return url;
+  }
+
+  public void setUrl(String url) {
+    this.url = url;
+  }
+
+  public String getDriverMemory() {
+    return driverMemory;
+  }
+
+  public void setDriverMemory(String driverMemory) {
+    this.driverMemory = driverMemory;
+  }
+
+  public String getExecutorMemory() {
+    return executorMemory;
+  }
+
+  public void setExecutorMemory(String executorMemory) {
+    this.executorMemory = executorMemory;
+  }
+
+  public Integer getNumExecutors() {
+    return numExecutors;
+  }
+
+  public void setNumExecutors(Integer numExecutors) {
+    this.numExecutors = numExecutors;
+  }
+
+  public String getFile() {
+    return file;
+  }
+
+  public void setFile(String file) {
+    this.file = file;
+  }
+
+  public Integer getExecutorCores() {
+    return executorCores;
+  }
+
+  public void setExecutorCores(Integer executorCores) {
+    this.executorCores = executorCores;
+  }
+
 }
