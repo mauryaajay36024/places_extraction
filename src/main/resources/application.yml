@@ -6,8 +6,13 @@ spring:
     - 'mailer'
 
 livy:
-  host: http://wdc04-prod-thor-compserv02.adnear.net:8998
-  createBatchEndpoint: /batches
+  url: http://192.168.10.170:8998/batches
+  numExecutors: 2 # 10
+  file: local://Users/ajaymaurya/PycharmProjects/livyTask/main.py
+  executorCores: 2 #  5
+  executorMemory: 4g #  6
+  driverMemory: 4g #  6
+  #url: http://192.168.11.68:8998/batches
   #historicJobLocation: hdfs://wdc-prod-hadoop-nn.adnear.net:8020/user/dataengg/deploy/historic_segment_collection.py
 
 mongo:
