@@ -30,21 +30,21 @@ public class PlacesExtractionController {
     }
 
     @ApiOperation(value = "Add metrics data and send mail to client")
-    @RequestMapping(value = "/metrics/add/", method = RequestMethod.POST)
+    @RequestMapping(value = "/metrics/add", method = RequestMethod.POST)
     public ResponseEntity<NearServiceResponseDto> uploadDataToDatabase(@RequestBody LocationMetrics locationMetrics, @RequestParam(value = "userId") String userId) throws Exception {
         return placesExtractionService.addPlacesDataToDatabase(locationMetrics,userId);
 
     }
 
     @ApiOperation(value = "Update metrics field data and send mail to user ")
-    @PutMapping(value ="/metrics/")
+    @PutMapping(value ="/metrics")
     public ResponseEntity<NearServiceResponseDto> updateMetricsData( @RequestParam(required = true, value = "id") Long id,@RequestBody LocationMetrics locationMetrics,@RequestParam(value = "userId") String userId) throws Exception {
         return placesExtractionService.updateMetricsDetail(id, locationMetrics,userId);
     }
 
     //Fetch location metrics data
     @ApiOperation(value = "Fetch metrics data for given id")
-    @GetMapping(value = "/metrics/")
+    @GetMapping(value = "/metrics")
     public LocationMetrics getMetricsData(@RequestParam(required = true, value = "id") Long id) throws Exception {
         return placesExtractionService.getLocationMetricsData(id);
     }
@@ -54,6 +54,13 @@ public class PlacesExtractionController {
     @GetMapping(value = "/metrics/all")
     public List<LocationMetrics> getAllMetricsData() throws Exception{
         return placesExtractionService.getAllLocationMetricsData();
+    }
+
+    //todo testing
+    @ApiOperation(value = "livy call to start a spark job")
+    @GetMapping(value = "/livy")
+    public ResponseEntity<NearServiceResponseDto> livy() throws Exception{
+        return placesExtractionService.livyStartSparkJob();
     }
 
 }
