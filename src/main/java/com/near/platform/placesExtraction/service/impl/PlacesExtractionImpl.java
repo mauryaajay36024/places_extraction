@@ -1,6 +1,8 @@
 package com.near.platform.placesExtraction.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.near.platform.placesExtraction.config.ApplicationConfig;
+import com.near.platform.placesExtraction.config.RedisConfig;
 import com.near.platform.placesExtraction.constant.Constants;
 import com.near.platform.placesExtraction.dto.request.FileProcessRequest;
 import com.near.platform.placesExtraction.exception.*;
@@ -17,10 +19,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import redis.clients.jedis.Jedis;
+
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -39,14 +40,16 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
   @Autowired
   NearMailerService nearMailerService;
 
+  @Autowired
+  RedisConfig redisConfig;
+
+  // livy configuration
   private String url;
   private String driverMemory;
   private String executorMemory;
   private Integer numExecutors;
   private String file;
   private Integer executorCores;
-//  private String queue;
-//  private String pyFiles;
 
   private ExecutorService taskPool = Executors.newFixedThreadPool(100);
 
@@ -165,48 +168,107 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
     }
     throw new MetricsDataNotFoundException("No metrics data found into database");
   }
-
-  //todo testing livy
+  //todo +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   @Override
   public ResponseEntity<NearServiceResponseDto> livyStartSparkJob() throws Exception {
 
     MessageCodeInfo messageCodeInfo;
     NearServiceResponseDto nearServiceResponseDto;
 
+    List<String> args = new ArrayList<>();
+    args.add("6562");
     Map<String, Object> conf = new HashMap<>();
     conf.put("spark.yarn.maxAppAttempts", 3);
     conf.put("spark.dynamicAllocation.minExecutors", 1);
     conf.put("spark.dynamicAllocation.maxExecutors", 20);
 
-    //todo added extra
-//    conf.put("spark.deployMode","cluster");
-//    conf.put("spark.master" ,"yarnClient");
-
-    FileProcessRequest fileProcessRequest = new FileProcessRequest(conf, numExecutors, file, executorMemory, driverMemory, executorCores);
+    FileProcessRequest fileProcessRequest = new FileProcessRequest(conf,args, numExecutors, file, executorMemory, driverMemory, executorCores);
     ObjectMapper mapper = new ObjectMapper();
-    String req = mapper.writeValueAsString(fileProcessRequest);
-    logger.info("request: {}", req);
+    String request = mapper.writeValueAsString(fileProcessRequest);
+    logger.info("request::  {}", request);
+
 
     RestTemplate restTemplate = new RestTemplate();
     HttpHeaders headers = new HttpHeaders();
     headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-    HttpEntity<FileProcessRequest> entity = new HttpEntity<>(fileProcessRequest, headers);
 
-    try {
-      String result = restTemplate.postForObject(url, entity, String.class);
-      logger.info("result {}",result);
-      logger.info("Spark job initiated");
+    if(getLivyJobQueueSize()==0) {
+
+      HttpEntity<String> entity = new HttpEntity<>(request, headers);
+      try {
+        String result = restTemplate.postForObject(url, entity, String.class);
+
+        //todo
+        Jedis jedis=redisConfig.getJedis();
+        jedis.lpush(Constants.REDIS_KEY,request);
+
+        logger.info("job initiated ");
+        logger.info("result {}", result);
+
+        messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
+        nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "PLT-0008", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job start");
+        return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.OK);
+
+      } catch (Exception e) {
+        logger.error("Exception ", e);
+      }
+    }
+    else if(getLivyJobQueueSize()>0){
+
+      Jedis jedis=redisConfig.getJedis();
+      jedis.lpush(Constants.REDIS_KEY,request);
+
+      logger.info("request is added into queue {}",request);
 
       messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
-      nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "NPL-0007", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job start");
+      nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "PLT-0008", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job request is added to queue");
       return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.OK);
-
-    } catch (Exception e) {
-      logger.error("Exception ",e);
     }
     messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
     nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "NPL-0007", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job failed");
     return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.PRECONDITION_FAILED);
+
+  }
+
+  //todo /////-----------------------++++++++++++++++++++++++++++++++--------------------------/////////
+  @Override
+  public ResponseEntity<NearServiceResponseDto> executeLivyJobFromQueue() throws Exception{
+    MessageCodeInfo messageCodeInfo;
+    NearServiceResponseDto nearServiceResponseDto;
+
+    if(getLivyJobQueueSize()>0){
+      Jedis jedis=redisConfig.getJedis();
+      jedis.rpop(Constants.REDIS_KEY);  //pop the request which is executed right now
+
+      String request = jedis.rpop(Constants.REDIS_KEY);
+
+      RestTemplate restTemplate = new RestTemplate();
+      HttpHeaders headers = new HttpHeaders();
+      headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+      HttpEntity<String> entity = new HttpEntity<>(request, headers);
+      try {
+
+        String result = restTemplate.postForObject(url, entity, String.class);
+        logger.info("job initiated ");
+        logger.info("result {}", result);
+
+        messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
+        nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "PLT-0008", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job start");
+        return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.OK);
+
+      } catch (Exception e) {
+        logger.error("Exception ", e);
+      }
+    }
+    messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
+    nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "NPL-0007", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job failed");
+    return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.PRECONDITION_FAILED);
+  }
+
+  public Long getLivyJobQueueSize(){
+    Jedis jedis=redisConfig.getJedis();
+    return jedis.llen(Constants.REDIS_KEY);
 
   }
 
@@ -253,7 +315,6 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
   }
 
 
-  //todo testing
   public String getUrl() {
     return url;
   }
