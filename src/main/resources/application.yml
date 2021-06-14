@@ -7,17 +7,20 @@ spring:
 
 livy:
   url: http://192.168.10.170:8998/batches
-  numExecutors: 2 # 10
-  file: local://Users/ajaymaurya/PycharmProjects/livyTask/main.py
+  numExecutors: 1 # 10
+  file: s3://near-places/tmp/kapil/scripts/main.py
   executorCores: 2 #  5
-  executorMemory: 4g #  6
-  driverMemory: 4g #  6
+  executorMemory: 1g #  6
+  driverMemory: 1g #  6
   #url: http://192.168.11.68:8998/batches
   #historicJobLocation: hdfs://wdc-prod-hadoop-nn.adnear.net:8020/user/dataengg/deploy/historic_segment_collection.py
 
 mongo:
   uriInConsul: "template.mongo.uri"
   database: "near_db"
+
+redis:
+  url: "localhost"
 
 ---
 
