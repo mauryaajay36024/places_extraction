@@ -56,11 +56,17 @@ public class PlacesExtractionController {
         return placesExtractionService.getAllLocationMetricsData();
     }
 
-    //todo testing
+
     @ApiOperation(value = "livy call to start a spark job")
     @GetMapping(value = "/livy")
     public ResponseEntity<NearServiceResponseDto> livy() throws Exception{
         return placesExtractionService.livyStartSparkJob();
+    }
+
+    @ApiOperation(value = "Redis call to do pop of the string data via script")
+    @GetMapping(value = "/redis")
+    public ResponseEntity<NearServiceResponseDto> popDataFromRedis() throws Exception{
+        return placesExtractionService.executeLivyJobFromQueue();
     }
 
 }
