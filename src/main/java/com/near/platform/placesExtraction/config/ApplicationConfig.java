@@ -10,6 +10,7 @@ public class ApplicationConfig {
   private Livy livy;
   private Consul consul;
   private Mongo mongo;
+  private Redis redis;
 
   public static class Mongo {
     private String uriInConsul;
@@ -65,6 +66,18 @@ public class ApplicationConfig {
     }
   }
 
+  public static class Redis{
+    private String url;
+
+    public String getUrl() {
+      return url;
+    }
+
+    public void setUrl(String url) {
+      this.url = url;
+    }
+  }
+
   public Mongo getMongo() {
     return mongo;
   }
@@ -89,4 +102,11 @@ public class ApplicationConfig {
     this.livy = livy;
   }
 
+  public Redis getRedis() {
+    return redis;
+  }
+
+  public void setRedis(Redis redis) {
+    this.redis = redis;
+  }
 }
