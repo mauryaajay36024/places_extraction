@@ -1,7 +1,6 @@
 package com.near.platform.placesExtraction.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.near.platform.placesExtraction.config.ApplicationConfig;
 import com.near.platform.placesExtraction.config.RedisConfig;
 import com.near.platform.placesExtraction.constant.Constants;
 import com.near.platform.placesExtraction.dto.request.FileProcessRequest;
@@ -30,6 +29,8 @@ import java.util.concurrent.Executors;
 public class PlacesExtractionImpl implements PlacesExtractionService {
 
   private final Logger logger = LoggerFactory.getLogger(PlacesExtractionImpl.class);
+
+  boolean status=false;
 
   @Autowired
   NearServiceResponseUtil nearServiceResponseUtil;
@@ -185,25 +186,20 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
     FileProcessRequest fileProcessRequest = new FileProcessRequest(conf,args, numExecutors, file, executorMemory, driverMemory, executorCores);
     ObjectMapper mapper = new ObjectMapper();
     String request = mapper.writeValueAsString(fileProcessRequest);
-    logger.info("request::  {}", request);
 
 
     RestTemplate restTemplate = new RestTemplate();
     HttpHeaders headers = new HttpHeaders();
     headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
-    if(getLivyJobQueueSize()==0) {
-
-      HttpEntity<String> entity = new HttpEntity<>(request, headers);
+    if(getLivyJobQueueSize()==0 && !status) {
       try {
+        HttpEntity<String> entity = new HttpEntity<>(request, headers);
         String result = restTemplate.postForObject(url, entity, String.class);
 
-        //todo
-        Jedis jedis=redisConfig.getJedis();
-        jedis.lpush(Constants.REDIS_KEY,request);
+        status=true;
 
-        logger.info("job initiated ");
-        logger.info("result {}", result);
+        logger.info("job initiated:: result {}", result);
 
         messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
         nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "PLT-0008", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job start");
@@ -213,7 +209,7 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
         logger.error("Exception ", e);
       }
     }
-    else if(getLivyJobQueueSize()>0){
+    else if(getLivyJobQueueSize()>0 || status){
 
       Jedis jedis=redisConfig.getJedis();
       jedis.lpush(Constants.REDIS_KEY,request);
@@ -238,19 +234,16 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
 
     if(getLivyJobQueueSize()>0){
       Jedis jedis=redisConfig.getJedis();
-      jedis.rpop(Constants.REDIS_KEY);  //pop the request which is executed right now
-
       String request = jedis.rpop(Constants.REDIS_KEY);
 
       RestTemplate restTemplate = new RestTemplate();
       HttpHeaders headers = new HttpHeaders();
       headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
-      HttpEntity<String> entity = new HttpEntity<>(request, headers);
       try {
-
+        HttpEntity<String> entity = new HttpEntity<>(request, headers);
         String result = restTemplate.postForObject(url, entity, String.class);
-        logger.info("job initiated ");
+        logger.info("job initiated from script::::");
         logger.info("result {}", result);
 
         messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
