@@ -18,4 +18,6 @@ public interface PlacesExtractionService {
   List<LocationMetrics>  getAllLocationMetricsData() throws Exception;
 
   ResponseEntity<NearServiceResponseDto> livyStartSparkJob() throws Exception;
+
+  ResponseEntity<NearServiceResponseDto> executeLivyJobFromQueue() throws Exception;
 }
