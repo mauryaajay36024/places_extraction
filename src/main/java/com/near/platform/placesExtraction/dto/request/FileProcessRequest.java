@@ -17,11 +17,13 @@ public class FileProcessRequest {
   private String executorMemory;
   private String driverMemory;
   private Integer executorCores;
-//  private List<String>  pyFiles;
+  private List<String> args;
 
 
-  public FileProcessRequest(Map<String, Object> conf, Integer numExecutors, String file, String executorMemory, String driverMemory, Integer executorCores) {
+
+  public FileProcessRequest(Map<String, Object> conf,List<String> args, Integer numExecutors, String file, String executorMemory, String driverMemory, Integer executorCores) {
     this.conf = conf;
+    this.args=args;
     this.numExecutors = numExecutors;
     this.file = file;
     this.executorMemory = executorMemory;
@@ -76,12 +78,12 @@ public class FileProcessRequest {
   public void setExecutorCores(Integer executorCores) {
     this.executorCores = executorCores;
   }
-//todo remove commented code
-//  public List<String> getPyFiles() {
-//    return pyFiles;
-//  }
-//
-//  public void setPyFiles(List<String> pyFiles) {
-//    this.pyFiles = pyFiles;
-//  }
+
+  public List<String> getArgs() {
+    return args;
+  }
+
+  public void setArgs(List<String> args) {
+    this.args = args;
+  }
 }
