@@ -1,6 +1,7 @@
 package com.near.platform.placesExtraction.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.near.platform.placesExtraction.config.ApplicationConfig;
 import com.near.platform.placesExtraction.config.RedisConfig;
 import com.near.platform.placesExtraction.constant.Constants;
 import com.near.platform.placesExtraction.dto.request.FileProcessRequest;
@@ -9,6 +10,7 @@ import com.near.platform.placesExtraction.model.mongo.LocationMetrics;
 import com.near.platform.placesExtraction.repository.PlacesExtractionRepository;
 import com.near.platform.placesExtraction.service.MailerService;
 import com.near.platform.placesExtraction.service.PlacesExtractionService;
+import com.near.platform.placesExtraction.util.GeneralUtil;
 import mailer.NearMailerService;
 import mcm.*;
 import org.slf4j.Logger;
@@ -42,41 +44,16 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
   NearMailerService nearMailerService;
 
   @Autowired
+  ApplicationConfig applicationConfig;
+
+  @Autowired
   RedisConfig redisConfig;
 
-  // livy configuration
-  private String url;
-  private String driverMemory;
-  private String executorMemory;
-  private Integer numExecutors;
-  private String file;
-  private Integer executorCores;
+  @Autowired
+  GeneralUtil util;
 
-  private ExecutorService taskPool = Executors.newFixedThreadPool(100);
 
-  //Add data to database
-  @Override
-  public ResponseEntity<NearServiceResponseDto> addMetricsDataToDatabase(LocationMetrics locationMetrics) throws Exception {
-    MessageCodeInfo messageCodeInfo;
-    NearServiceResponseDto nearServiceResponseDto;
-    //To check data is valid
-    dataValidator(locationMetrics);
-    //To check if data is not already present into database
-    if(placesExtractionRepository.findById(locationMetrics.getPoiListId()).isEmpty()) {
-      try {
-        placesExtractionRepository.save(locationMetrics);
-
-        messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLATFORM, "PLT-0008", null);
-        nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.OK.value(), "PLT-0008", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Data saved to database successfully");
-        return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.OK);
-      } catch (Exception ex) {
-        logger.error(" Exception while saving data to database", ex);
-      }
-    }
-    messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLATFORM, "PLT-0001", null);
-    nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "PLT-0001", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Duplicate data entry");
-    return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.PRECONDITION_FAILED);
-  }
+  private final ExecutorService taskPool = Executors.newFixedThreadPool(100);
 
   //Add data and send mail to user
   @Override
@@ -85,14 +62,14 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
     NearServiceResponseDto nearServiceResponseDto;
 
     //To check data is valid
-    dataValidator(locationMetrics);
+    util.dataValidator(locationMetrics);
     //To check if data is not already present into database
     if(placesExtractionRepository.findById(locationMetrics.getPoiListId()).isEmpty()) {
       try {
         placesExtractionRepository.save(locationMetrics);
 
         String successBody = "Dear user,<br><br>Your request for data upload is complete.<br>"+
-            "<br>" +locationMetrics.toString();
+            "<br>" +locationMetrics;
         taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, userId, Constants.SUCCESS_SUBJECT, successBody));
         logger.info("Mailer initiated Successfully");
 
@@ -103,6 +80,12 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
         logger.error(" Exception while saving data to database", ex);
       }
     }
+
+    String failureBody = "Dear user,<br><br>Your request for data upload is failed.<br>"+
+        "<br>"+locationMetrics;
+    taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, userId, Constants.FAILURE_SUBJECT, failureBody));
+    logger.info("Mailer initiated Successfully");
+
     messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLATFORM, "PLT-0001", null);
     nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "PLT-0001", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Duplicate data entry");
     return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.PRECONDITION_FAILED);
@@ -113,7 +96,7 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
     MessageCodeInfo messageCodeInfo;
     NearServiceResponseDto nearServiceResponseDto;
 
-    dataValidator(locationMetricsDetails);
+    util.dataValidator(locationMetricsDetails);
 
     if (placesExtractionRepository.findById(id).isPresent() && placesExtractionRepository.findById(id).get().getPoiListId().equals(locationMetricsDetails.getPoiListId())) {
       try {
@@ -137,7 +120,7 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
         placesExtractionRepository.save(locationMetrics);
 
         String successBody = "Dear user,<br><br>Your request for data update is complete.<br>"+
-            "<br>" +locationMetrics.toString();
+            "<br>" +locationMetrics;
         taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, userId, Constants.SUCCESS_SUBJECT, successBody));
 
         messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0056", null);
@@ -148,6 +131,11 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
         logger.error("Exception while updating data :", ex);
       }
     }
+
+    String failureBody = "Dear user,<br><br>Your request for data update is failed.<br>";
+    taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, userId, Constants.FAILURE_SUBJECT, failureBody));
+    logger.info("Mailer initiated Successfully");
+
     messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
     nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "NPL-0007", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Id not matched, please enter correct id");
     return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.PRECONDITION_FAILED);
@@ -171,19 +159,19 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
   }
 
   @Override
-  public ResponseEntity<NearServiceResponseDto> livyStartSparkJob() throws Exception {
+  public ResponseEntity<NearServiceResponseDto> livyStartSparkJob(String poiListId) throws Exception {
 
     MessageCodeInfo messageCodeInfo;
     NearServiceResponseDto nearServiceResponseDto;
 
     List<String> args = new ArrayList<>();
-    args.add("6562");
+    args.add(poiListId);
     Map<String, Object> conf = new HashMap<>();
     conf.put("spark.yarn.maxAppAttempts", 3);
     conf.put("spark.dynamicAllocation.minExecutors", 1);
     conf.put("spark.dynamicAllocation.maxExecutors", 20);
 
-    FileProcessRequest fileProcessRequest = new FileProcessRequest(conf,args, numExecutors, file, executorMemory, driverMemory, executorCores);
+    FileProcessRequest fileProcessRequest = new FileProcessRequest(conf,args, applicationConfig.getLivy().getNumExecutors(), applicationConfig.getLivy().getFile(), applicationConfig.getLivy().getExecutorMemory(), applicationConfig.getLivy().getDriverMemory(), applicationConfig.getLivy().getExecutorCores());
     ObjectMapper mapper = new ObjectMapper();
     String request = mapper.writeValueAsString(fileProcessRequest);
 
@@ -192,10 +180,10 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
     HttpHeaders headers = new HttpHeaders();
     headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
-    if(getLivyJobQueueSize()!=null && getLivyJobQueueSize()==0 && !status) {
+    if(util.getLivyJobQueueSize()!=null && util.getLivyJobQueueSize()==0 && !status) {
       try {
         HttpEntity<String> entity = new HttpEntity<>(request, headers);
-        String result = restTemplate.postForObject(url, entity, String.class);
+        String result = restTemplate.postForObject(applicationConfig.getLivy().getUrl(), entity, String.class);
 
         status=true;
 
@@ -209,7 +197,7 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
         logger.error("Exception ", e);
       }
     }
-    else if(getLivyJobQueueSize()!=null && getLivyJobQueueSize()>0 || status){
+    else if(util.getLivyJobQueueSize()!=null && util.getLivyJobQueueSize()>0 || status){
       try {
         Jedis jedis = redisConfig.getJedis();
         jedis.lpush(Constants.REDIS_KEY, request);
@@ -234,7 +222,7 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
     MessageCodeInfo messageCodeInfo;
     NearServiceResponseDto nearServiceResponseDto;
 
-    if(getLivyJobQueueSize()!=null && getLivyJobQueueSize()>0){
+    if(util.getLivyJobQueueSize()!=null && util.getLivyJobQueueSize()>0){
 
       RestTemplate restTemplate = new RestTemplate();
       HttpHeaders headers = new HttpHeaders();
@@ -245,8 +233,8 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
         String request = jedis.rpop(Constants.REDIS_KEY);
 
         HttpEntity<String> entity = new HttpEntity<>(request, headers);
-        String result = restTemplate.postForObject(url, entity, String.class);
-        logger.info("job initiated from script::::result {}", result);
+        String result = restTemplate.postForObject(applicationConfig.getLivy().getUrl(), entity, String.class);
+        logger.info("job initiated via script::::result {}", result);
 
         messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
         nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "PLT-0008", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job start");
@@ -260,108 +248,6 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
     messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
     nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "NPL-0007", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job failed");
     return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.PRECONDITION_FAILED);
-  }
-
-  public Long getLivyJobQueueSize(){
-    try {
-      Jedis jedis=redisConfig.getJedis();
-      return jedis.llen(Constants.REDIS_KEY);
-    }
-    catch (Exception e){
-      logger.error("Exception in getLivyJobQueueSize() :: ",e);
-    }
-    return null;
-  }
-
-  private void dataValidator(LocationMetrics locationMetrics)  throws Exception{
-    if (locationMetrics.getCountry() == null) {
-      throw new MetricsFieldNotFoundException("Country value is missing");
-    }
-    else if(locationMetrics.getExtractedPOICount() == null){
-      throw new MetricsFieldNotFoundException("ExtractedPoiCount value is missing");
-    }
-    else if(locationMetrics.getDeleteCount() == null){
-      throw new MetricsFieldNotFoundException("DeletedCount value is missing");
-    }
-    else if(locationMetrics.getCurrentPOICount() == null){
-      throw new MetricsFieldNotFoundException("CurrentPoiCount value is missing");
-    }
-    else if (locationMetrics.getPoiListId() == null){
-      throw new MetricsFieldNotFoundException("Poi List Id is missing");
-    }
-    else if (locationMetrics.getIngestCount() == null){
-      throw new MetricsFieldNotFoundException("Ingested count is missing");
-    }
-    else if (locationMetrics.getUpdateCount() == null){
-      throw new MetricsFieldNotFoundException(" Update count is missing");
-    }
-    else if (locationMetrics.getDateOfExtraction() == null){
-      throw new MetricsFieldNotFoundException("Date Of Extraction is missing");
-    }
-    else if (locationMetrics.getGroundTruth() == null){
-      throw new MetricsFieldNotFoundException("Ground truth is missing");
-    }
-    else if (locationMetrics.getSource() == null){
-      throw new MetricsFieldNotFoundException("Source of data is missing");
-    }
-    else if (locationMetrics.getPoiListName() == null){
-      throw new MetricsFieldNotFoundException("Brand name  is missing");
-    }
-    else if (locationMetrics.getCat1() == null){
-      throw new MetricsFieldNotFoundException("Category1 of metrics data is missing");
-    }
-    else if (locationMetrics.getCat2() == null){
-      throw new MetricsFieldNotFoundException("Category2 of metrics data is missing");
-    }
-  }
-
-
-  public String getUrl() {
-    return url;
-  }
-
-  public void setUrl(String url) {
-    this.url = url;
-  }
-
-  public String getDriverMemory() {
-    return driverMemory;
-  }
-
-  public void setDriverMemory(String driverMemory) {
-    this.driverMemory = driverMemory;
-  }
-
-  public String getExecutorMemory() {
-    return executorMemory;
-  }
-
-  public void setExecutorMemory(String executorMemory) {
-    this.executorMemory = executorMemory;
-  }
-
-  public Integer getNumExecutors() {
-    return numExecutors;
-  }
-
-  public void setNumExecutors(Integer numExecutors) {
-    this.numExecutors = numExecutors;
-  }
-
-  public String getFile() {
-    return file;
-  }
-
-  public void setFile(String file) {
-    this.file = file;
-  }
-
-  public Integer getExecutorCores() {
-    return executorCores;
-  }
-
-  public void setExecutorCores(Integer executorCores) {
-    this.executorCores = executorCores;
   }
 
 }
