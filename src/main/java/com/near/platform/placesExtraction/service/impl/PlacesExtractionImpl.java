@@ -192,7 +192,7 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
     HttpHeaders headers = new HttpHeaders();
     headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
-    if(getLivyJobQueueSize()==0 && !status) {
+    if(getLivyJobQueueSize()!=null && getLivyJobQueueSize()==0 && !status) {
       try {
         HttpEntity<String> entity = new HttpEntity<>(request, headers);
         String result = restTemplate.postForObject(url, entity, String.class);
@@ -209,16 +209,19 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
         logger.error("Exception ", e);
       }
     }
-    else if(getLivyJobQueueSize()>0 || status){
+    else if(getLivyJobQueueSize()!=null && getLivyJobQueueSize()>0 || status){
+      try {
+        Jedis jedis = redisConfig.getJedis();
+        jedis.lpush(Constants.REDIS_KEY, request);
 
-      Jedis jedis=redisConfig.getJedis();
-      jedis.lpush(Constants.REDIS_KEY,request);
-
-      logger.info("request is added into queue {}",request);
-
-      messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
-      nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "PLT-0008", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job request is added to queue");
-      return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.OK);
+        logger.info("request is added into queue {}", request);
+        messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
+        nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "PLT-0008", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job request is added to queue");
+        return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.OK);
+      }
+      catch (Exception e){
+        logger.error("Exception in livyStartSparkJob() ::",e);
+      }
     }
     messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
     nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "NPL-0007", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job failed");
@@ -231,15 +234,16 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
     MessageCodeInfo messageCodeInfo;
     NearServiceResponseDto nearServiceResponseDto;
 
-    if(getLivyJobQueueSize()>0){
-      Jedis jedis=redisConfig.getJedis();
-      String request = jedis.rpop(Constants.REDIS_KEY);
+    if(getLivyJobQueueSize()!=null && getLivyJobQueueSize()>0){
 
       RestTemplate restTemplate = new RestTemplate();
       HttpHeaders headers = new HttpHeaders();
       headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
       try {
+        Jedis jedis=redisConfig.getJedis();
+        String request = jedis.rpop(Constants.REDIS_KEY);
+
         HttpEntity<String> entity = new HttpEntity<>(request, headers);
         String result = restTemplate.postForObject(url, entity, String.class);
         logger.info("job initiated from script::::result {}", result);
@@ -249,18 +253,24 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
         return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.OK);
 
       } catch (Exception e) {
-        logger.error("Exception ", e);
+        logger.error("Exception in executeLivyJobFromQueue() ::", e);
       }
     }
+    status=false; //making status as false when list is empty so that new request can be directly executed
     messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
     nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "NPL-0007", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job failed");
     return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.PRECONDITION_FAILED);
   }
 
   public Long getLivyJobQueueSize(){
-    Jedis jedis=redisConfig.getJedis();
-    return jedis.llen(Constants.REDIS_KEY);
-
+    try {
+      Jedis jedis=redisConfig.getJedis();
+      return jedis.llen(Constants.REDIS_KEY);
+    }
+    catch (Exception e){
+      logger.error("Exception in getLivyJobQueueSize() :: ",e);
+    }
+    return null;
   }
 
   private void dataValidator(LocationMetrics locationMetrics)  throws Exception{
