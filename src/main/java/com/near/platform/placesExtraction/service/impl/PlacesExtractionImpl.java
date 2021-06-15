@@ -169,7 +169,7 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
     }
     throw new MetricsDataNotFoundException("No metrics data found into database");
   }
-  //todo +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
   @Override
   public ResponseEntity<NearServiceResponseDto> livyStartSparkJob() throws Exception {
 
@@ -226,7 +226,6 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
 
   }
 
-  //todo /////-----------------------++++++++++++++++++++++++++++++++--------------------------/////////
   @Override
   public ResponseEntity<NearServiceResponseDto> executeLivyJobFromQueue() throws Exception{
     MessageCodeInfo messageCodeInfo;
@@ -243,8 +242,7 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
       try {
         HttpEntity<String> entity = new HttpEntity<>(request, headers);
         String result = restTemplate.postForObject(url, entity, String.class);
-        logger.info("job initiated from script::::");
-        logger.info("result {}", result);
+        logger.info("job initiated from script::::result {}", result);
 
         messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
         nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "PLT-0008", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job start");
