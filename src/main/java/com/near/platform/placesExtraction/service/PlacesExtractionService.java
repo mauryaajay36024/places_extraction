@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface PlacesExtractionService {
-  ResponseEntity<NearServiceResponseDto> addMetricsDataToDatabase(LocationMetrics locationMetrics) throws Exception;
 
   ResponseEntity<NearServiceResponseDto> addPlacesDataToDatabase(LocationMetrics locationMetrics, String userId) throws Exception;
 
@@ -17,7 +16,7 @@ public interface PlacesExtractionService {
 
   List<LocationMetrics>  getAllLocationMetricsData() throws Exception;
 
-  ResponseEntity<NearServiceResponseDto> livyStartSparkJob() throws Exception;
+  ResponseEntity<NearServiceResponseDto> livyStartSparkJob(String poiListId) throws Exception;
 
   ResponseEntity<NearServiceResponseDto> executeLivyJobFromQueue() throws Exception;
 }
