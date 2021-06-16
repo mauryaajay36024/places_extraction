@@ -237,12 +237,11 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
         logger.info("job initiated via script::::result {}", result);
 
         if(jobStatus){
-          String successBody = "Dear user,<br><br>Livy request from queue executed successfully.<br>";
-          taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, "ajay@near.co", Constants.LIVY_SUCCESS_SUBJECT, successBody));
+          taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, Constants.PLACES_TEAM_EMAIL, Constants.LIVY_SUCCESS_SUBJECT, Constants.LIVY_SUCCESS_BODY));
+          logger.info("Mailer initiated Successfully");
         }
         else {
-          String failureBody = "Dear user,<br><br>Previous livy request failed. Now executing next request from queue<br>";
-          taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, "ajay@near.co", Constants.LIVY_FAILURE_SUBJECT, failureBody));
+          taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, Constants.PLACES_TEAM_EMAIL, Constants.LIVY_FAILURE_SUBJECT, Constants.LIVY_FAILURE_BODY));
           logger.info("Mailer initiated Successfully");
         }
 
@@ -256,7 +255,7 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
     }
     status=false; //making status as false when request list is empty so that new request can be directly executed
     messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
-    nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "NPL-0007", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "No spark job in redis queue");
+    nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "NPL-0007", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "No more spark job in redis queue");
     return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.PRECONDITION_FAILED);
   }
 
