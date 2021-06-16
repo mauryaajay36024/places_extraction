@@ -20,7 +20,7 @@ public class PlacesExtractionController {
 
     @ApiOperation(value = "Add metrics data and send mail to client")
     @RequestMapping(value = "/metrics/insert", method = RequestMethod.POST)
-    public ResponseEntity<NearServiceResponseDto> uploadDataToDatabase(@RequestBody LocationMetrics locationMetrics, @RequestParam(value = "emailId") String userId) throws Exception {
+    public ResponseEntity<NearServiceResponseDto> insertMetricsData(@RequestBody LocationMetrics locationMetrics, @RequestParam(value = "emailId") String userId) throws Exception {
         return placesExtractionService.addPlacesDataToDatabase(locationMetrics,userId);
 
     }
@@ -46,12 +46,12 @@ public class PlacesExtractionController {
 
     @ApiOperation(value = "livy call to start a spark job")
     @GetMapping(value = "/livy/runScript")
-    public ResponseEntity<NearServiceResponseDto> livy(@RequestParam(value = "POIListId") String poiListId) throws Exception{
-        return placesExtractionService.livyStartSparkJob(poiListId);
+    public ResponseEntity<NearServiceResponseDto> livyExecutePyspark(@RequestParam(value = "POIListId") String poiListId) throws Exception{
+        return placesExtractionService.livyExecutePysparkJob(poiListId);
     }
 
     @ApiOperation(value = "Redis call to pop request and start livy job via script")
-    @GetMapping(value = "/redis")
+    @GetMapping(value = "/redis/runScript")
     public ResponseEntity<NearServiceResponseDto> popDataFromRedis(@RequestParam(value = "jobStatus")boolean jobStatus) throws Exception{
         return placesExtractionService.executeLivyJobFromQueue(jobStatus);
     }
