@@ -218,7 +218,7 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
   }
 
   @Override
-  public ResponseEntity<NearServiceResponseDto> executeLivyJobFromQueue() throws Exception{
+  public ResponseEntity<NearServiceResponseDto> executeLivyJobFromQueue(boolean jobStatus) throws Exception{
     MessageCodeInfo messageCodeInfo;
     NearServiceResponseDto nearServiceResponseDto;
 
@@ -236,17 +236,27 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
         String result = restTemplate.postForObject(applicationConfig.getLivy().getUrl(), entity, String.class);
         logger.info("job initiated via script::::result {}", result);
 
+        if(jobStatus){
+          String successBody = "Dear user,<br><br>Livy request from queue executed successfully.<br>";
+          taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, "ajay@near.co", Constants.LIVY_SUCCESS_SUBJECT, successBody));
+        }
+        else {
+          String failureBody = "Dear user,<br><br>Previous livy request failed. Now executing next request from queue<br>";
+          taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, "ajay@near.co", Constants.LIVY_FAILURE_SUBJECT, failureBody));
+          logger.info("Mailer initiated Successfully");
+        }
+
         messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
-        nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "PLT-0008", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job start");
+        nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "PLT-0008", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job started from redis queue");
         return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.OK);
 
       } catch (Exception e) {
         logger.error("Exception in executeLivyJobFromQueue() ::", e);
       }
     }
-    status=false; //making status as false when list is empty so that new request can be directly executed
+    status=false; //making status as false when request list is empty so that new request can be directly executed
     messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
-    nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "NPL-0007", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job failed");
+    nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "NPL-0007", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "No spark job in redis queue");
     return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.PRECONDITION_FAILED);
   }
 
