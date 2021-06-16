@@ -52,8 +52,8 @@ public class PlacesExtractionController {
 
     @ApiOperation(value = "Redis call to pop request and start livy job via script")
     @GetMapping(value = "/redis")
-    public ResponseEntity<NearServiceResponseDto> popDataFromRedis() throws Exception{
-        return placesExtractionService.executeLivyJobFromQueue();
+    public ResponseEntity<NearServiceResponseDto> popDataFromRedis(@RequestParam(value = "jobStatus")boolean jobStatus) throws Exception{
+        return placesExtractionService.executeLivyJobFromQueue(jobStatus);
     }
 
 }
