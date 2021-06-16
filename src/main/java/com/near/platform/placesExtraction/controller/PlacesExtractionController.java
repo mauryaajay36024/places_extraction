@@ -19,7 +19,7 @@ public class PlacesExtractionController {
     PlacesExtractionService placesExtractionService;
 
     @ApiOperation(value = "Add metrics data and send mail to client")
-    @RequestMapping(value = "/metrics/insert", method = RequestMethod.POST)
+    @PostMapping(value = "/metrics/insert")
     public ResponseEntity<NearServiceResponseDto> insertMetricsData(@RequestBody LocationMetrics locationMetrics, @RequestParam(value = "emailId") String userId) throws Exception {
         return placesExtractionService.addPlacesDataToDatabase(locationMetrics,userId);
 
