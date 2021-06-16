@@ -16,7 +16,7 @@ public interface PlacesExtractionService {
 
   List<LocationMetrics>  getAllLocationMetricsData() throws Exception;
 
-  ResponseEntity<NearServiceResponseDto> livyStartSparkJob(String poiListId) throws Exception;
+  ResponseEntity<NearServiceResponseDto> livyExecutePysparkJob(String poiListId) throws Exception;
 
   ResponseEntity<NearServiceResponseDto> executeLivyJobFromQueue(boolean jobStatus) throws Exception;
 }
