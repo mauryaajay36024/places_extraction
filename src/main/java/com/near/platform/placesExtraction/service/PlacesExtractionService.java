@@ -18,5 +18,5 @@ public interface PlacesExtractionService {
 
   ResponseEntity<NearServiceResponseDto> livyStartSparkJob(String poiListId) throws Exception;
 
-  ResponseEntity<NearServiceResponseDto> executeLivyJobFromQueue() throws Exception;
+  ResponseEntity<NearServiceResponseDto> executeLivyJobFromQueue(boolean jobStatus) throws Exception;
 }
