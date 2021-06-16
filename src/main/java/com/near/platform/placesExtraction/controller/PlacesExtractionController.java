@@ -33,7 +33,7 @@ public class PlacesExtractionController {
 
     @ApiOperation(value = "Fetch metrics data for given id")
     @GetMapping(value = "/metrics/fetchSingleData")
-    public LocationMetrics getMetricsData(@RequestParam(value = "id") Long id) throws Exception {
+    public LocationMetrics getMetricsDataForId(@RequestParam(value = "id") Long id) throws Exception {
         return placesExtractionService.getLocationMetricsData(id);
     }
 
