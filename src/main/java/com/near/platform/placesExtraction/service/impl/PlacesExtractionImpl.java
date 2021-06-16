@@ -67,7 +67,6 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
     if(placesExtractionRepository.findById(locationMetrics.getPoiListId()).isEmpty()) {
       try {
         placesExtractionRepository.save(locationMetrics);
-
         String successBody = "Dear user,<br><br>Your request for data upload is complete.<br>"+
             "<br>" +locationMetrics;
         taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, userId, Constants.SUCCESS_SUBJECT, successBody));
@@ -119,9 +118,7 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
 
         placesExtractionRepository.save(locationMetrics);
 
-        String successBody = "Dear user,<br><br>Your request for data update is complete.<br>"+
-            "<br>" +locationMetrics;
-        taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, userId, Constants.SUCCESS_SUBJECT, successBody));
+        taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, userId, Constants.SUCCESS_SUBJECT, Constants.UPDATE_SUCCESS_BODY));
 
         messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0056", null);
         nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.OK.value(), "NPL-0056", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Data updated to database successfully, Shortly you will receive confirmation mail");
@@ -132,8 +129,7 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
       }
     }
 
-    String failureBody = "Dear user,<br><br>Your request for data update is failed.<br>";
-    taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, userId, Constants.FAILURE_SUBJECT, failureBody));
+    taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, userId, Constants.FAILURE_SUBJECT,Constants.UPDATE_FAILURE_BODY));
     logger.info("Mailer initiated Successfully");
 
     messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
@@ -159,7 +155,7 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
   }
 
   @Override
-  public ResponseEntity<NearServiceResponseDto> livyStartSparkJob(String poiListId) throws Exception {
+  public ResponseEntity<NearServiceResponseDto> livyExecutePysparkJob(String poiListId) throws Exception {
 
     MessageCodeInfo messageCodeInfo;
     NearServiceResponseDto nearServiceResponseDto;
@@ -208,7 +204,7 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
         return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.OK);
       }
       catch (Exception e){
-        logger.error("Exception in livyStartSparkJob() ::",e);
+        logger.error("Exception in livyExecutePysparkJob() ::",e);
       }
     }
     messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
@@ -238,12 +234,11 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
 
         if(jobStatus){
           taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, Constants.PLACES_TEAM_EMAIL, Constants.LIVY_SUCCESS_SUBJECT, Constants.LIVY_SUCCESS_BODY));
-          logger.info("Mailer initiated Successfully");
         }
         else {
           taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, Constants.PLACES_TEAM_EMAIL, Constants.LIVY_FAILURE_SUBJECT, Constants.LIVY_FAILURE_BODY));
-          logger.info("Mailer initiated Successfully");
         }
+        logger.info("Mailer initiated Successfully");
 
         messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
         nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "PLT-0008", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Spark job started from redis queue");
