@@ -5,6 +5,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PlacesExtractionRepository extends MongoRepository<LocationMetrics, Long> {
+public interface PlacesExtractionRepository extends MongoRepository<LocationMetrics, String>{
 
 }
