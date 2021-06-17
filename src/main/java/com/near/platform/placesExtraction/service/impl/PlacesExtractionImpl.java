@@ -17,11 +17,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.data.domain.Example;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import redis.clients.jedis.Jedis;
-
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -63,24 +63,22 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
 
     //To check data is valid
     util.dataValidator(locationMetrics);
-    //To check if data is not already present into database
-    if(placesExtractionRepository.findById(locationMetrics.getPoiListId()).isEmpty()) {
-      try {
-        placesExtractionRepository.save(locationMetrics);
-        String successBody = "Dear user,<br><br>Your request for data upload is complete.<br>"+
-            "<br>" +locationMetrics;
-        taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, userId, Constants.SUCCESS_SUBJECT, successBody));
-        logger.info("Mailer initiated Successfully");
+    try {
+      placesExtractionRepository.insert(locationMetrics);
+      String successBody = "Dear user,<br><br>Your request for data insert is complete.<br>"+
+          "<br>" +locationMetrics;
+      taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, userId, Constants.SUCCESS_SUBJECT, successBody));
+      logger.info("Mailer initiated Successfully");
 
-        messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLATFORM, "PLT-0008", null);
-        nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.OK.value(), "PLT-0008", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Data saved to database successfully, Shortly you will receive confirmation mail");
-        return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.OK);
-      } catch (Exception ex) {
-        logger.error(" Exception while saving data to database", ex);
-      }
+      messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLATFORM, "PLT-0008", null);
+      nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.OK.value(), "PLT-0008", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Data saved to database successfully, Shortly you will receive confirmation mail");
+      return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.OK);
+    } catch (Exception ex) {
+      logger.error(" Exception while saving data to database", ex);
     }
 
-    String failureBody = "Dear user,<br><br>Your request for data upload is failed.<br>"+
+
+    String failureBody = "Dear user,<br><br>Your request for data insert is failed.<br>"+
         "<br>"+locationMetrics;
     taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, userId, Constants.FAILURE_SUBJECT, failureBody));
     logger.info("Mailer initiated Successfully");
@@ -91,65 +89,38 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
   }
 
   @Override
-  public ResponseEntity<NearServiceResponseDto> updateMetricsDetail(Long id, LocationMetrics locationMetricsDetails,String userId) throws Exception {
-    MessageCodeInfo messageCodeInfo;
-    NearServiceResponseDto nearServiceResponseDto;
-
-    util.dataValidator(locationMetricsDetails);
-
-    if (placesExtractionRepository.findById(id).isPresent() && placesExtractionRepository.findById(id).get().getPoiListId().equals(locationMetricsDetails.getPoiListId())) {
-      try {
-        LocationMetrics locationMetrics = placesExtractionRepository.findById(id).get();
-
-        locationMetrics.setCurrentPOICount(locationMetricsDetails.getCurrentPOICount());//set current poi count
-        locationMetrics.setExtractedPOICount(locationMetricsDetails.getExtractedPOICount());//set extracted poi count
-        locationMetrics.setIngestCount(locationMetricsDetails.getIngestCount()); //set ingest count
-        locationMetrics.setUpdateCount(locationMetricsDetails.getUpdateCount());// set updated count
-        locationMetrics.setDeleteCount(locationMetricsDetails.getDeleteCount()); //set delete count
-        locationMetrics.setDateOfExtraction(locationMetricsDetails.getDateOfExtraction()); //set date of extraction
-        locationMetrics.setPoiListId(locationMetricsDetails.getPoiListId()); //set poi list id
-        locationMetrics.setCountry(locationMetricsDetails.getCountry());//set country
-        locationMetrics.setGroundTruth(locationMetricsDetails.getGroundTruth());//set ground truth
-        locationMetrics.setSource(locationMetricsDetails.getSource());//set source
-        locationMetrics.setPoiListName(locationMetricsDetails.getPoiListName()); //update brand name
-        locationMetrics.setCat1(locationMetricsDetails.getCat1()); //update cat1
-        locationMetrics.setCat2(locationMetricsDetails.getCat2()); //update cat2
-
-
-        placesExtractionRepository.save(locationMetrics);
-
-        taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, userId, Constants.SUCCESS_SUBJECT, Constants.UPDATE_SUCCESS_BODY));
-
-        messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0056", null);
-        nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.OK.value(), "NPL-0056", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Data updated to database successfully, Shortly you will receive confirmation mail");
-        return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.OK);
-
-      } catch (Exception ex) {
-        logger.error("Exception while updating data :", ex);
+  public List<LocationMetrics> getLocationMetricsDataForId(LocationMetrics locationMetrics) throws Exception {
+    try {
+      Example<LocationMetrics> example = Example.of(locationMetrics);
+      if (placesExtractionRepository.findAll(example).size() != 0) {
+        return placesExtractionRepository.findAll(example);
       }
     }
-
-    taskPool.submit(new MailerService(nearMailerService, Constants.MAILER_FROM_ADDRESS, userId, Constants.FAILURE_SUBJECT,Constants.UPDATE_FAILURE_BODY));
-    logger.info("Mailer initiated Successfully");
-
-    messageCodeInfo = nearServiceResponseUtil.fetchMessageCodeInfo(MessageCodeCategory.PLACES, "NPL-0007", null);
-    nearServiceResponseDto = nearServiceResponseUtil.buildNearServiceResponseDto(true, HttpStatus.PRECONDITION_FAILED.value(), "NPL-0007", messageCodeInfo.getLongDesc(), messageCodeInfo.getShortDesc(), messageCodeInfo.getCodeType(), "Id not matched, please enter correct id");
-    return new ResponseEntity<>(nearServiceResponseDto, HttpStatus.PRECONDITION_FAILED);
-  }
-
-  @Override
-  public LocationMetrics getLocationMetricsData(Long id) throws Exception {
-    if(placesExtractionRepository.findById(id).isPresent()){
-      return placesExtractionRepository.findById(id).get();
+    catch (Exception e){
+      logger.error("Exception in getLocationMetricsDataForId::",e);
     }
-    throw new IdNotFoundException("Entered id doesn't  matched, please provide correct id");
+    throw new IdNotFoundException("No data is available");
   }
 
   @Override
-  public List<LocationMetrics> getAllLocationMetricsData() throws Exception{
-    if(!placesExtractionRepository.findAll().isEmpty()){
+  public List<LocationMetrics> getAllLocationMetricsData(boolean latestOnly) throws Exception{
+    try {
+      if (!latestOnly && !placesExtractionRepository.findAll().isEmpty()) {
+        return placesExtractionRepository.findAll();
+      }
 
-      return placesExtractionRepository.findAll();
+      else if (latestOnly && !placesExtractionRepository.findAll().isEmpty()) {
+        List<LocationMetrics> locationMetricsList = placesExtractionRepository.findAll();
+
+        locationMetricsList.sort(Collections.reverseOrder());
+
+        Set<LocationMetrics> set = new LinkedHashSet<>(locationMetricsList);
+        locationMetricsList.clear();
+        locationMetricsList.addAll(set);
+        return locationMetricsList;
+      }
+    }catch (Exception e){
+      logger.error("Exception in getAllLocationMetricsData ::",e);
     }
     throw new MetricsDataNotFoundException("No metrics data found into database");
   }
@@ -163,9 +134,9 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
     List<String> args = new ArrayList<>();
     args.add(poiListId);
     Map<String, Object> conf = new HashMap<>();
-    conf.put("spark.yarn.maxAppAttempts", 3);
-    conf.put("spark.dynamicAllocation.minExecutors", 1);
-    conf.put("spark.dynamicAllocation.maxExecutors", 20);
+    conf.put(Constants.MAX_APP_ATTEMPTS, 3);
+    conf.put(Constants.MIN_EXECUTORS, 1);
+    conf.put(Constants.MAX_EXECUTORS, 20);
 
     FileProcessRequest fileProcessRequest = new FileProcessRequest(conf,args, applicationConfig.getLivy().getNumExecutors(), applicationConfig.getLivy().getFile(), applicationConfig.getLivy().getExecutorMemory(), applicationConfig.getLivy().getDriverMemory(), applicationConfig.getLivy().getExecutorCores());
     ObjectMapper mapper = new ObjectMapper();
@@ -214,7 +185,7 @@ public class PlacesExtractionImpl implements PlacesExtractionService {
   }
 
   @Override
-  public ResponseEntity<NearServiceResponseDto> executeLivyJobFromQueue(boolean jobStatus) throws Exception{
+  public ResponseEntity<NearServiceResponseDto> executeLivyJobFromRedis(boolean jobStatus) throws Exception{
     MessageCodeInfo messageCodeInfo;
     NearServiceResponseDto nearServiceResponseDto;
 
