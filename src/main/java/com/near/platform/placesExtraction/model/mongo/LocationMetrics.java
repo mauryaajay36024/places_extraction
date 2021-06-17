@@ -1,12 +1,17 @@
 package com.near.platform.placesExtraction.model.mongo;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.Comparator;
 import java.util.Date;
+import java.util.Objects;
 
 @Document(collection = "places")
-public class LocationMetrics {
+public class LocationMetrics implements Comparable<LocationMetrics>, Comparator<LocationMetrics> {
     @Id
+    private ObjectId _id;
     private Long poiListId;
     private String poiListName;
     private String cat1;
@@ -21,7 +26,7 @@ public class LocationMetrics {
     private Long groundTruth;
     private String source;
 
-    public LocationMetrics(Long poiListId, String poiListName, String cat1, String cat2, Long currentPOICount, Long extractedPOICount, Long ingestCount, Long updateCount, Long deleteCount, Date dateOfExtraction, String country, Long groundTruth, String source) {
+    public LocationMetrics( Long poiListId, String poiListName, String cat1, String cat2, Long currentPOICount, Long extractedPOICount, Long ingestCount, Long updateCount, Long deleteCount, Date dateOfExtraction, String country, Long groundTruth, String source) {
         this.poiListId = poiListId;
         this.poiListName = poiListName;
         this.cat1 = cat1;
@@ -45,6 +50,20 @@ public class LocationMetrics {
         this.poiListId = poiListId;
     }
 
+    public String getPoiListName() {
+        return poiListName;
+    }
+
+    public String getCat1() {
+        return cat1;
+    }
+
+
+    public String getCat2() {
+        return cat2;
+    }
+
+
     public Long getCurrentPOICount() {
         return currentPOICount;
     }
@@ -55,10 +74,6 @@ public class LocationMetrics {
 
     public Long getExtractedPOICount() {
         return extractedPOICount;
-    }
-
-    public void setExtractedPOICount(Long extractedPOICount) {
-        this.extractedPOICount = extractedPOICount;
     }
 
     public Long getIngestCount() {
@@ -117,29 +132,7 @@ public class LocationMetrics {
         this.source = source;
     }
 
-    public String getPoiListName() {
-        return poiListName;
-    }
 
-    public void setPoiListName(String poiListName) {
-        this.poiListName = poiListName;
-    }
-
-    public String getCat1() {
-        return cat1;
-    }
-
-    public void setCat1(String cat1) {
-        this.cat1 = cat1;
-    }
-
-    public String getCat2() {
-        return cat2;
-    }
-
-    public void setCat2(String cat2) {
-        this.cat2 = cat2;
-    }
 
     @Override
     public String toString() {
@@ -157,5 +150,28 @@ public class LocationMetrics {
             "<br> Country               :" + country +
             "<br> Ground Truth          :" + groundTruth +
             "<br> Source                :" + source ;
+    }
+
+    @Override
+    public int compareTo(LocationMetrics other) {
+        return this.getDateOfExtraction().compareTo(other.dateOfExtraction);
+    }
+
+    @Override
+    public int compare(LocationMetrics object1, LocationMetrics object2) {
+        return object1.getDateOfExtraction().compareTo(object2.getDateOfExtraction());
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        LocationMetrics that = (LocationMetrics) object;
+        return poiListId.equals(that.poiListId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(poiListId);
     }
 }
