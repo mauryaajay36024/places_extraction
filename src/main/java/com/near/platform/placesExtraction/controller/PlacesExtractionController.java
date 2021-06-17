@@ -18,29 +18,23 @@ public class PlacesExtractionController {
     @Autowired
     PlacesExtractionService placesExtractionService;
 
-    @ApiOperation(value = "Add metrics data and send mail to client")
+    @ApiOperation(value = "Add metrics data and send mail to user")
     @PostMapping(value = "/metrics/insert")
     public ResponseEntity<NearServiceResponseDto> insertMetricsData(@RequestBody LocationMetrics locationMetrics, @RequestParam(value = "emailId") String userId) throws Exception {
         return placesExtractionService.addPlacesDataToDatabase(locationMetrics,userId);
 
     }
 
-    @ApiOperation(value = "Update metrics field data and send mail to user ")
-    @PutMapping(value ="/metrics/update")
-    public ResponseEntity<NearServiceResponseDto> updateMetricsData( @RequestParam(value = "id") Long id,@RequestBody LocationMetrics locationMetrics,@RequestParam(value = "emailId") String userId) throws Exception {
-        return placesExtractionService.updateMetricsDetail(id, locationMetrics,userId);
-    }
-
     @ApiOperation(value = "Fetch metrics data for given id")
-    @GetMapping(value = "/metrics/fetchSingleData")
-    public LocationMetrics getMetricsDataForId(@RequestParam(value = "id") Long id) throws Exception {
-        return placesExtractionService.getLocationMetricsData(id);
+    @GetMapping(value = "/metrics/fetchDataForId")
+    public List<LocationMetrics> getMetricsDataForId(@RequestBody LocationMetrics locationMetrics) throws Exception {
+        return placesExtractionService.getLocationMetricsDataForId(locationMetrics);
     }
 
-    @ApiOperation(value = "Fetch all metrics data")
+    @ApiOperation(value = "Fetch all metrics data with LatestOnly param")
     @GetMapping(value = "/metrics/fetchAllData")
-    public List<LocationMetrics> getAllMetricsData() throws Exception{
-        return placesExtractionService.getAllLocationMetricsData();
+    public List<LocationMetrics> getAllMetricsData(@RequestParam(value = "LatestOnly") boolean latestOnly) throws Exception{
+        return placesExtractionService.getAllLocationMetricsData(latestOnly);
     }
 
 
@@ -53,7 +47,7 @@ public class PlacesExtractionController {
     @ApiOperation(value = "Redis call to pop request and start livy job via script")
     @GetMapping(value = "/redis/runScript")
     public ResponseEntity<NearServiceResponseDto> popDataFromRedis(@RequestParam(value = "jobStatus")boolean jobStatus) throws Exception{
-        return placesExtractionService.executeLivyJobFromQueue(jobStatus);
+        return placesExtractionService.executeLivyJobFromRedis(jobStatus);
     }
 
 }
